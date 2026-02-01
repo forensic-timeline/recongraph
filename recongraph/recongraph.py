@@ -876,7 +876,7 @@ class ReconGraph(object):
         print("\n[✓] Pipeline Completed Successfully")
 
 
-if __name__ == '__main__':
+def main():
     """
     Main execution entry point.
     Uses the ReconGraph facade to run the full pipeline.
@@ -906,3 +906,6 @@ if __name__ == '__main__':
             
     else:
         print(f"[!] File {args.file} not found. Please ensure the input file is present.")
+
+if __name__ == '__main__':
+    main()
