@@ -2,3 +2,5 @@
 /recongraph/__pycache__
 .pytest_cache/
 tests/.pytest_cache
+recongraph.egg-info/
+dist/

@@ -10,7 +10,6 @@ authors = [
 ]
 description = "Reconstruction of Forensic Timelines Using Graph Theory"
 readme = "README.md"
-license = {file = "LICENSE"}
 requires-python = ">=3.8"
 dependencies = [
     "PyYAML",
@@ -18,9 +17,9 @@ dependencies = [
     "pandas",
     "lxml",
 ]
+license-files = ["LICENSE"]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
