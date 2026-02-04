@@ -39,24 +39,21 @@
 
 Recongraph uses several Python packages to function properly. It is recommended to install the package in a virtual environment to avoid dependency conflicts. Here is a simple example of how to create and activate a virtual environment:
 
-### Anaconda or Miniconda
+  1. Anaconda or Miniconda
 
-```bash
-conda create -n recongraph python
-conda activate recongraph
-```
+      ```bash
+      conda create -n recongraph python
+      conda activate recongraph
+      ```
 
 Or using venv (recommended):
 
-### Venv
+  2. Venv
 
-```bash
-python -m venv venv
-# Windows
-venv\Scripts\activate
-# Linux/Mac
-source venv/bin/activate
-```
+      ```bash
+      python -m venv venv
+      source venv/bin/activate
+      ```
 
 ## Recongraph Package Installation
 
@@ -64,7 +61,7 @@ Recongraph package installation can be done directly from PyPI using `pip` or by
 
 ### Installing via Pip
 
-```bash
+ ```bash
 pip install recongraph
 ```
 
@@ -72,22 +69,20 @@ Or installing by cloning this repository:
 
 ### Installing from Source
 
-1. Clone the Repository
+  1. **Clone the Repository**
 
-```bash
-git clone https://github.com/forensic-timeline/recongraph
-```
+      ```bash
+      git clone https://github.com/forensic-timeline/recongraph
+      ```
 
-2. Install Depedencies
+  2. **Install Depedencies**
 
-```bash
-cd recongraph
-pip install -e .
-```
+      ```bash
+      cd recongraph
+      pip install -e .
+      ```
 
 ## Sigma Rules Setup
-
-THIS PART NEED IMPROVEMENT
 
 To use the recongraph tools, sigma rules are needed to label and detect events in the log files. Sigma rules can be downloaded from https://github.com/SigmaHQ/sigma. The sigma rules are released under the [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).
 
@@ -99,11 +94,31 @@ git clone https://github.com/SigmaHQ/sigma
 
 ## Quick Start
 
-Here is a simple example of how to use `recongraph` to reconstruct a forensic timeline:
+  Here is a simple example of how to use `recongraph` to reconstruct a forensic timeline:
 
-```bash
-recongraph -f ./plaso-result.csv -r ./sigma-rules
-```
+  ```bash
+  recongraph -f /path/to/your/plaso-file.csv -r /path/to/your/sigma-rules-folder -o output-filename.graphml
+  ```
+
+## How to Test
+
+To ensure that the installation is correct and the code is functioning as expected, you can run the test suite provided in the ``tests/`` directory.
+
+1.  **Install Test Dependencies**:
+    Ensure you have ``pytest`` installed.
+
+    ```bash
+    pip install pytest pandas pyyaml
+    ```
+
+2.  **Run Tests**:
+    Navigate to the project root directory and execute:
+
+    ```bash
+    pytest -v
+    ```
+
+    You should see output indicating that all tests have passed.
 
 ## Input Data Format
 
