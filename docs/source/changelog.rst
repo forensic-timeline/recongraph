@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.0.2
+------
+
+- Added documentation for ReconGraph.
+- Added test automation for ReconGraph.
+
 v0.0.1
 ------
 
