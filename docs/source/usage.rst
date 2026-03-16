@@ -27,6 +27,72 @@ Example:
 
    recongraph -f forensic_timeline.csv -r ./sigma_rules/ 
 
+Running with Docker
+-------------------
+
+If you installed ReconGraph via Docker, you can run the same CLI commands by passing arguments directly to the container.
+The working directory inside the container is ``/app/data``, so mount your local data folder there to read inputs and retrieve outputs.
+
+Basic usage
+^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Linux / macOS
+   docker run --rm -v "$(pwd)/data:/app/data" recongraph -f forensic_timeline.csv
+
+   # Windows (PowerShell)
+   docker run --rm -v "${PWD}\data:/app/data" recongraph -f forensic_timeline.csv
+
+Full example with all output flags
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   # Linux / macOS
+   docker run --rm -v "$(pwd)/data:/app/data" recongraph \
+     -f forensic_timeline.csv \
+     -o result_graph.graphml \
+     --export-csv \
+     --export-sigma
+
+   # Windows (PowerShell)
+   docker run --rm -v "${PWD}\data:/app/data" recongraph `
+     -f forensic_timeline.csv `
+     -o result_graph.graphml `
+     --export-csv `
+     --export-sigma
+
+This will produce the following files inside your local ``data/`` folder:
+
+- ``result_graph.graphml`` — the forensic graph
+- ``reconstruction_event_logs.csv`` — detailed event log entries
+- ``<filename>_sigma_labeled.csv`` — input log annotated with Sigma rule matches
+
+Using custom Sigma rules
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Docker image ships with the **Sigma Core** rules bundled at ``/app/sigma`` (set via the ``SIGMA_RULES_PATH`` environment variable). To use your own rules directory instead, mount it as a volume and pass it with ``-r``:
+
+.. code-block:: bash
+
+   # Linux / macOS
+   docker run --rm \
+     -v "$(pwd)/data:/app/data" \
+     -v "$(pwd)/my_sigma_rules:/app/custom_sigma" \
+     recongraph -f forensic_timeline.csv -r /app/custom_sigma
+
+   # Windows (PowerShell)
+   docker run --rm `
+     -v "${PWD}\data:/app/data" `
+     -v "${PWD}\my_sigma_rules:/app/custom_sigma" `
+     recongraph -f forensic_timeline.csv -r /app/custom_sigma
+
+.. note::
+
+   The bundled Sigma Core rules path (``/app/sigma``) is exported as the ``SIGMA_RULES_PATH``
+   environment variable inside the container. ReconGraph can use this as a default when ``-r`` is not specified.
+
 Library Usage
 -------------
 

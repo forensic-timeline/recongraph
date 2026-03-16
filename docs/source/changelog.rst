@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.0.3
+------
+
+- Added Dockerfile for ReconGraph.
+
 v0.0.2
 ------
 

@@ -11,8 +11,10 @@
 - [Installation](#installation)
   - [Python Virtual Environment Setup](#python-virtual-environment-setup)
   - [Recongraph Package Installation](#recongraph-package-installation)
+  - [Installing via Docker](#installing-via-docker)
   - [Sigma Rules Setup](#sigma-rules-setup)
 - [Quick Start](#quick-start)
+  - [Running with Docker](#running-with-docker)
 - [Input Data Format](#input-data-format)
   - [Log File](#log-file)
   - [Event File](#event-file)
@@ -82,6 +84,72 @@ Or installing by cloning this repository:
       pip install -e .
       ```
 
+Another way of installing Recongraph is by using Docker. This is the **recommended approach** if you want a fully isolated, dependency-free environment — no Python installation required on your machine.
+
+### Installing via Docker
+
+> **Prerequisites**: [Docker](https://docs.docker.com/get-docker/) must be installed and running.
+
+The Docker image uses a **multi-stage build** to keep the final image small and efficient:
+1. A **builder** stage installs all build tools and compiles Python dependencies.
+2. A **runtime** stage copies only the compiled libraries and source code, and automatically downloads the Sigma Core rules package.
+
+**Step 1 — Build the image** (run once from the project root directory):
+
+```bash
+docker build -t recongraph .
+```
+
+This will:
+- Install all Python dependencies
+- Copy the `recongraph` source code into the image
+- Automatically download and bundle the **Sigma Core** rules into `/app/sigma` inside the container
+
+**Step 2 — Prepare your data directory**
+
+Create a local folder to hold your input log files and to receive the output files:
+
+```bash
+mkdir data
+```
+Place your Plaso CSV file (e.g., `forensic_timeline.csv`) inside this `data/` folder.
+
+**Step 3 — Run the container**
+
+Mount your `data/` folder into the container and pass your arguments:
+
+```bash
+# Linux / macOS
+docker run --rm -v "$(pwd)/data:/app/data" recongraph -f forensic_timeline.csv
+
+# Windows (Command Prompt)
+docker run --rm -v "%cd%\data:/app/data" recongraph -f forensic_timeline.csv
+
+# Windows (PowerShell)
+docker run --rm -v "${PWD}\data:/app/data" recongraph -f forensic_timeline.csv
+```
+
+> The `--rm` flag removes the container automatically after it finishes.
+> All output files will appear in your local `data/` folder.
+
+**Using your own Sigma rules (optional)**
+
+The image ships with the Sigma Core rules by default (stored at `/app/sigma`). To use a custom rules directory from your local machine, mount it as an additional volume:
+
+```bash
+# Linux / macOS
+docker run --rm \
+  -v "$(pwd)/data:/app/data" \
+  -v "$(pwd)/my_sigma_rules:/app/custom_sigma" \
+  recongraph -f forensic_timeline.csv -r /app/custom_sigma
+
+# Windows (PowerShell)
+docker run --rm `
+  -v "${PWD}\data:/app/data" `
+  -v "${PWD}\my_sigma_rules:/app/custom_sigma" `
+  recongraph -f forensic_timeline.csv -r /app/custom_sigma
+```
+
 ## Sigma Rules Setup
 
 To use the recongraph tools, sigma rules are needed to label and detect events in the log files. Sigma rules can be downloaded from https://github.com/SigmaHQ/sigma. The sigma rules are released under the [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).
@@ -94,11 +162,26 @@ git clone https://github.com/SigmaHQ/sigma
 
 ## Quick Start
 
-  Here is a simple example of how to use `recongraph` to reconstruct a forensic timeline:
+Here is a simple example of how to use `recongraph` to reconstruct a forensic timeline:
 
-  ```bash
-  recongraph -f /path/to/your/plaso-file.csv -r /path/to/your/sigma-rules-folder -o output-filename.graphml
-  ```
+```bash
+recongraph -f /path/to/your/plaso-file.csv -r /path/to/your/sigma-rules-folder -o output-filename.graphml
+```
+
+### Running with Docker
+
+If you are using the Docker image, place your input file in a local `data/` folder and run:
+
+```bash
+# Uses the bundled Sigma Core rules
+docker run --rm -v "$(pwd)/data:/app/data" recongraph \
+  -f forensic_timeline.csv \
+  -o result.graphml \
+  --export-csv \
+  --export-sigma
+```
+
+Output files (`result.graphml`, `reconstruction_event_logs.csv`, etc.) will be written back to your local `data/` folder.
 
 ## How to Test
 
