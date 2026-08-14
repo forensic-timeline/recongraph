@@ -2,7 +2,9 @@
 
 **Reconstruction of Forensic Timelines Using Graph Theory**
 
-`recongraph` is a Python library designed to reconstruct and visualize system behaviors and activities based on logs from various devices, such as Windows and Linux systems. It converts Plaso log2timeline CSV files into a forensic graph timeline. By parsing sequential log data and mapping them to defined events, `recongraph` builds a `MultiDiGraph` (Multi-Directed Graph) that represents the state transitions and operational flow of the target system. This graph-based approach aids in forensic analysis, anomaly detection, and understanding complex system behaviors across diverse platforms.
+`recongraph` is a Python library designed to reconstruct and visualize system behaviors and activities based on logs from various devices, such as Windows and Linux systems. It converts Plaso log2timeline CSV files into a forensic graph timeline. By parsing sequential log data and mapping them to defined events, `recongraph` builds a `MultiDiGraph` (Multi-Directed Graph) that represents the state transitions and operational flow of the target system. This graph-based approach aids in forensic analysis, anomaly detection, and understanding complex system behaviors across diverse platforms. 
+
+This tool is based on this paper: [Forensic Event Reconstruction for Drones](https://ieeexplore.ieee.org/document/9702864)
 
 ## Table of Contents
 
