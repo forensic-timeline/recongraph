@@ -4,3 +4,5 @@
 tests/.pytest_cache
 recongraph.egg-info/
 dist/
+venv/
+sample/

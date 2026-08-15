@@ -241,16 +241,18 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* Severity */
-.sev-critical { background: #fde8ec; color: #c0392b; }
-.sev-high     { background: #fef3e2; color: #d35400; }
-.sev-medium   { background: #fefbe6; color: #b7950b; }
-.sev-low      { background: #e8f6ef; color: #1e8449; }
-.sev-unknown  { background: #f0f2f5; color: #7f8c8d; }
-.dot-critical { background: #e74c3c; }
-.dot-high     { background: #e67e22; }
-.dot-medium   { background: #f1c40f; }
-.dot-low      { background: #27ae60; }
-.dot-unknown  { background: #95a5a6; }
+.sev-critical      { background: #fde8ec; color: #c0392b; }
+.sev-high          { background: #fef3e2; color: #d35400; }
+.sev-medium        { background: #fefbe6; color: #b7950b; }
+.sev-low           { background: #e8f6ef; color: #1e8449; }
+.sev-informational { background: #e8f1fb; color: #2471a3; }
+.sev-unknown       { background: #f0f2f5; color: #7f8c8d; }
+.dot-critical      { background: #e74c3c; }
+.dot-high          { background: #e67e22; }
+.dot-medium        { background: #f1c40f; }
+.dot-low           { background: #27ae60; }
+.dot-informational { background: #3498db; }
+.dot-unknown       { background: #95a5a6; }
 
 /* Toast */
 .toast {
@@ -269,7 +271,7 @@ input[type=range]::-webkit-slider-thumb {
 <header>
   <div class="header-left">
     <div class="header-logo">Recon<span>Graph</span> Visualizer</div>
-    <span class="header-version">v0.0.3</span>
+    <span class="header-version">v0.0.4</span>
   </div>
   <div class="header-stats" id="header-stats" style="display:none">
     <span class="hstat">Nodes: <strong id="s-nodes">0</strong></span>
@@ -359,6 +361,11 @@ input[type=range]::-webkit-slider-thumb {
         <div class="leg-dot dot-low"></div>
         <span class="leg-label">Low</span>
         <span class="leg-count" id="cnt-low">0</span>
+      </div>
+      <div class="legend-row" data-sev="informational" onclick="toggleSev('informational')">
+        <div class="leg-dot dot-informational"></div>
+        <span class="leg-label">Informational</span>
+        <span class="leg-count" id="cnt-informational">0</span>
       </div>
       <div class="legend-row" data-sev="unknown" onclick="toggleSev('unknown')">
         <div class="leg-dot dot-unknown"></div>
@@ -457,17 +464,30 @@ let selectedId = null;
 
 const SEV_COLOR = {
   critical: '#e74c3c', high: '#e67e22',
-  medium: '#f1c40f', low: '#27ae60', unknown: '#95a5a6'
+  medium: '#f1c40f', low: '#27ae60',
+  informational: '#3498db', unknown: '#95a5a6'
 };
+
+// Severity tiers ordered most → least severe. Drives sidebar list ordering.
+const SEV_ORDER = ['critical', 'high', 'medium', 'low', 'informational', 'unknown'];
 
 function normSev(s) {
   if (!s) return 'unknown';
   const l = s.toLowerCase();
-  if (l.includes('critical')) return 'critical';
-  if (l.includes('high'))     return 'high';
-  if (l.includes('medium'))   return 'medium';
-  if (l.includes('low'))      return 'low';
+  if (l.includes('critical'))      return 'critical';
+  if (l.includes('high'))          return 'high';
+  if (l.includes('medium'))        return 'medium';
+  if (l.includes('informational')) return 'informational';
+  if (l.includes('low'))           return 'low';
   return 'unknown';
+}
+
+// Extract a severity token like "high" from a sigma label such as
+// "0. SSH Brute Force[high]". Fallback for GraphML without a standalone
+// level/severity attribute.
+function levelFromLabel(str) {
+  const m = /\[([^\]]+)\]\s*$/.exec(str || '');
+  return m ? m[1] : '';
 }
 
 // ── SVG Init ──
@@ -515,7 +535,8 @@ function parseGraphML(xml) {
     nodes.push({
       id,
       label: a.label || a.sigma || a.event || id,
-      level: normSev(a.level || a.severity || a.sigma_level || ''),
+      level: normSev(a.level || a.severity || a.sigma_level ||
+                     levelFromLabel(a.event || a.sigma || a.label || '')),
       count: parseInt(a.count || a.log_count || '1') || 1,
       timestamp: a.timestamp || a.datetime || '',
       snippet: a.snippet || a.message || a.log_snippet || '',
@@ -844,7 +865,7 @@ function updateStats(data) {
   const ts = data.nodes.map(n => n.timestamp).filter(Boolean).sort();
   document.getElementById('sum-first').textContent = ts[0] ? ts[0].slice(0,16) : '—';
   document.getElementById('sum-last').textContent  = ts.at(-1) ? ts.at(-1).slice(0,16) : '—';
-  ['critical','high','medium','low','unknown'].forEach(s => {
+  SEV_ORDER.forEach(s => {
     document.getElementById('cnt-'+s).textContent = data.nodes.filter(n => (n.level||'unknown')===s).length;
   });
 }
@@ -853,8 +874,9 @@ function updateStats(data) {
 function buildNodeList(data) {
   const list = document.getElementById('node-list');
   list.innerHTML = '';
-  const order = { critical:0, high:1, medium:2, low:3, unknown:4 };
-  const sorted = [...data.nodes].sort((a,b) => (order[a.level]||4) - (order[b.level]||4));
+  const order = Object.fromEntries(SEV_ORDER.map((s, i) => [s, i]));
+  const fallback = order.unknown;
+  const sorted = [...data.nodes].sort((a,b) => (order[a.level] ?? fallback) - (order[b.level] ?? fallback));
   sorted.forEach(n => {
     const div = document.createElement('div');
     div.className = 'node-item';
@@ -903,11 +925,43 @@ document.addEventListener('drop', e => {
 
 // ── Export ──
 function exportSVG() {
-  if (!graphData) { showToast('No graph loaded'); return; }
-  const s = document.getElementById('graph-svg').cloneNode(true);
-  s.setAttribute('xmlns','http://www.w3.org/2000/svg');
-  const blob = new Blob([s.outerHTML], { type:'image/svg+xml' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'recongraph.svg'; a.click();
+  if (!graphData || !gSel) { showToast('No graph loaded'); return; }
+
+  // Bounding box of the drawn content, in world (pre‑zoom) coordinates.
+  const bbox = gSel.node().getBBox();
+  if (!bbox.width || !bbox.height) { showToast('Nothing to export'); return; }
+
+  const PAD = 40;
+  const vbX = bbox.x - PAD, vbY = bbox.y - PAD;
+  const vbW = bbox.width + PAD * 2, vbH = bbox.height + PAD * 2;
+
+  const clone = document.getElementById('graph-svg').cloneNode(true);
+  clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+  // Standalone SVG needs explicit size + viewBox (page CSS does not apply).
+  clone.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+  clone.setAttribute('width', Math.round(vbW));
+  clone.setAttribute('height', Math.round(vbH));
+
+  // Drop the current pan/zoom transform so the viewBox frames the graph.
+  const cloneInner = clone.querySelector('g');
+  if (cloneInner) cloneInner.removeAttribute('transform');
+
+  // Opaque background so viewers don't render it transparent/blank.
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  bg.setAttribute('x', vbX); bg.setAttribute('y', vbY);
+  bg.setAttribute('width', vbW); bg.setAttribute('height', vbH);
+  bg.setAttribute('fill', '#f7f8fa');
+  clone.insertBefore(bg, clone.firstChild);
+
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+              new XMLSerializer().serializeToString(clone);
+  const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'recongraph.svg';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   showToast('SVG exported');
 }
 function exportJSON() {

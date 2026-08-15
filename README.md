@@ -2,27 +2,37 @@
 
 **Reconstruction of Forensic Timelines Using Graph Theory**
 
-`recongraph` is a Python library designed to reconstruct and visualize system behaviors and activities based on logs from various devices, such as Windows and Linux systems. It converts Plaso log2timeline CSV files into a forensic graph timeline. By parsing sequential log data and mapping them to defined events, `recongraph` builds a `MultiDiGraph` (Multi-Directed Graph) that represents the state transitions and operational flow of the target system. This graph-based approach aids in forensic analysis, anomaly detection, and understanding complex system behaviors across diverse platforms. 
+`recongraph` is a Python library and CLI that reconstructs and visualizes system
+behavior from logs of various devices (e.g. Windows and Linux). It converts Plaso
+`log2timeline` CSV files into a forensic graph timeline: by parsing sequential log
+data and matching it against **Sigma rules**, `recongraph` builds a `MultiDiGraph`
+(Multi-Directed Graph) representing the state transitions and operational flow of
+the target system. This aids forensic analysis, anomaly detection, and
+understanding complex system behavior across platforms.
 
-This tool is based on this paper: [Forensic Event Reconstruction for Drones](https://ieeexplore.ieee.org/document/9702864)
+This tool is based on the paper:
+[Forensic Event Reconstruction for Drones](https://ieeexplore.ieee.org/document/9702864).
 
 ## Table of Contents
 
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-  - [Python Virtual Environment Setup](#python-virtual-environment-setup)
-  - [Recongraph Package Installation](#recongraph-package-installation)
-  - [Installing via Docker](#installing-via-docker)
-  - [Sigma Rules Setup](#sigma-rules-setup)
+  - [Set Up a Virtual Environment](#set-up-a-virtual-environment)
+  - [Install from PyPI](#install-from-pypi)
+  - [Install from Source](#install-from-source)
+  - [Install via Docker](#install-via-docker)
+- [Sigma Rules Setup](#sigma-rules-setup)
 - [Quick Start](#quick-start)
-  - [Running with Docker](#running-with-docker)
+  - [Run Locally](#run-locally)
+  - [Run with Docker](#run-with-docker)
+- [Command-Line Options](#command-line-options)
 - [Input Data Format](#input-data-format)
-  - [Log File](#log-file)
-  - [Event File](#event-file)
 - [Output](#output)
+- [Visualizing the Graph](#visualizing-the-graph)
+- [How to Test](#how-to-test)
 - [Documentation](#documentation)
-- [License](#license)
+- [Licenses](#licenses)
 
 ## Features
 
@@ -31,219 +41,261 @@ This tool is based on this paper: [Forensic Event Reconstruction for Drones](htt
 - **Intelligent Log Detection**: Automatically identifies various log formats (e.g., Apache, Linux auth, Syslog) and extracts relevant metadata like HTTP methods, URIs, and status codes.
 - **Weighted Behavioral Mapping**: Edges are weighted by transition frequency, helping to distinguish common flows from rare or suspicious sequences.
 - **Anomaly-Focused Reconstruction**: Specifically isolates and maps behaviors based on rule severity levels (Critical, High, Medium, Low).
-- **Multi-Format Export**: Exports graphs to GraphML for visualization (Gephi, Cytoscape) and detailed forensic timelines to CSV.
+- **Multi-Format Export**: Exports graphs to GraphML for visualization (Gephi, Cytoscape, or the bundled web visualizer) and detailed forensic timelines to CSV.
 
 ## Prerequisites
 
-- Python 3.13 or higher
-- Git
-- Python virtual environment (venv or conda)
+- **Python 3.13 or higher**
+- **Git**
+- **pip** (and, recommended, a virtual environment via `venv` or `conda`)
+- **Sigma rules** — see [Sigma Rules Setup](#sigma-rules-setup)
 
-## Python Virtual Environment Setup
+> Prefer a zero-setup, dependency-free environment? Skip straight to
+> [Install via Docker](#install-via-docker) — no local Python required.
 
-Recongraph uses several Python packages to function properly. It is recommended to install the package in a virtual environment to avoid dependency conflicts. Here is a simple example of how to create and activate a virtual environment:
+## Installation
 
-  1. Anaconda or Miniconda
+There are three ways to install `recongraph`: from **PyPI**, from **source**, or
+via **Docker**. For the PyPI and source methods, set up a virtual environment
+first.
 
-      ```bash
-      conda create -n recongraph python
-      conda activate recongraph
-      ```
+### Set Up a Virtual Environment
 
-Or using venv (recommended):
+Using `venv` (recommended):
 
-  2. Venv
+```bash
+python -m venv venv
 
-      ```bash
-      python -m venv venv
-      source venv/bin/activate
-      ```
+# Activate it:
+source venv/bin/activate        # Linux / macOS
+venv\Scripts\activate           # Windows (PowerShell / CMD)
+```
 
-## Recongraph Package Installation
+Or using Anaconda / Miniconda:
 
-Recongraph package installation can be done directly from PyPI using `pip` or by cloning this repository
+```bash
+conda create -n recongraph python=3.13
+conda activate recongraph
+```
 
-### Installing via Pip
+### Install from PyPI
 
- ```bash
+```bash
 pip install recongraph
 ```
 
-Or installing by cloning this repository:
+### Install from Source
 
-### Installing from Source
+1. **Clone the repository**
 
-  1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/forensic-timeline/recongraph
+   ```
 
-      ```bash
-      git clone https://github.com/forensic-timeline/recongraph
-      ```
+2. **Install the package (editable mode)**
 
-  2. **Install Depedencies**
+   ```bash
+   cd recongraph
+   pip install -e .
+   ```
 
-      ```bash
-      cd recongraph
-      pip install -e .
-      ```
+### Install via Docker
 
-Another way of installing Recongraph is by using Docker. This is the **recommended approach** if you want a fully isolated, dependency-free environment — no Python installation required on your machine.
+This is the **recommended approach** for a fully isolated, dependency-free
+environment — no Python installation required on your machine.
 
-### Installing via Docker
+> **Prerequisite**: [Docker](https://docs.docker.com/get-docker/) must be installed and running.
 
-> **Prerequisites**: [Docker](https://docs.docker.com/get-docker/) must be installed and running.
+The image uses a **multi-stage build** to keep the final image small:
 
-The Docker image uses a **multi-stage build** to keep the final image small and efficient:
-1. A **builder** stage installs all build tools and compiles Python dependencies.
-2. A **runtime** stage copies only the compiled libraries and source code, and automatically downloads the Sigma Core rules package.
+1. A **builder** stage installs build tools and compiles the Python dependencies.
+2. A **runtime** stage copies only the compiled libraries and source code, and
+   automatically downloads the **Sigma Core** rules into `/app/sigma`.
 
-**Step 1 — Build the image** (run once from the project root directory):
+**Step 1 — Build the image** (run once, from the project root):
 
 ```bash
 docker build -t recongraph .
 ```
 
-This will:
-- Install all Python dependencies
-- Copy the `recongraph` source code into the image
-- Automatically download and bundle the **Sigma Core** rules into `/app/sigma` inside the container
-
-**Step 2 — Prepare your data directory**
-
-Create a local folder to hold your input log files and to receive the output files:
+**Step 2 — Prepare a data directory** for your input logs and output files:
 
 ```bash
 mkdir data
 ```
-Place your Plaso CSV file (e.g., `forensic_timeline.csv`) inside this `data/` folder.
 
-**Step 3 — Run the container**
+Place your Plaso CSV file (e.g., `forensic_timeline.csv`) inside `data/`.
 
-Mount your `data/` folder into the container and pass your arguments:
-
-```bash
-# Linux / macOS
-docker run --rm -v "$(pwd)/data:/app/data" recongraph -f forensic_timeline.csv
-
-# Windows (Command Prompt)
-docker run --rm -v "%cd%\data:/app/data" recongraph -f forensic_timeline.csv
-
-# Windows (PowerShell)
-docker run --rm -v "${PWD}\data:/app/data" recongraph -f forensic_timeline.csv
-```
-
-> The `--rm` flag removes the container automatically after it finishes.
-> All output files will appear in your local `data/` folder.
-
-**Using your own Sigma rules (optional)**
-
-The image ships with the Sigma Core rules by default (stored at `/app/sigma`). To use a custom rules directory from your local machine, mount it as an additional volume:
-
-```bash
-# Linux / macOS
-docker run --rm \
-  -v "$(pwd)/data:/app/data" \
-  -v "$(pwd)/my_sigma_rules:/app/custom_sigma" \
-  recongraph -f forensic_timeline.csv -r /app/custom_sigma
-
-# Windows (PowerShell)
-docker run --rm `
-  -v "${PWD}\data:/app/data" `
-  -v "${PWD}\my_sigma_rules:/app/custom_sigma" `
-  recongraph -f forensic_timeline.csv -r /app/custom_sigma
-```
+You are now ready to run the container — see [Run with Docker](#run-with-docker).
 
 ## Sigma Rules Setup
 
-To use the recongraph tools, sigma rules are needed to label and detect events in the log files. Sigma rules can be downloaded from https://github.com/SigmaHQ/sigma. The sigma rules are released under the [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).
+`recongraph` uses Sigma rules to label and detect events. **You must provide a
+rules directory** — without one, no events are matched and the resulting graph is
+empty. The rules directory is resolved in this order:
 
-Using git clone, you can use the sigma rules folder:
+1. the `-r/--rules` command-line option, if given; otherwise
+2. the `SIGMA_RULES_PATH` environment variable, if set.
+
+Download the official rules from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma):
 
 ```bash
 git clone https://github.com/SigmaHQ/sigma
 ```
 
+You can then point `-r` at the cloned `sigma/rules` directory (or any folder of
+`.yml` rules).
+
+> **Docker note**: the Docker image already bundles the Sigma Core rules at
+> `/app/sigma` and sets `SIGMA_RULES_PATH=/app/sigma`, so they are used
+> automatically — no `-r` needed. Pass `-r` only to override with your own rules.
+
+Sigma rules are released under the
+[Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).
+
 ## Quick Start
 
-Here is a simple example of how to use `recongraph` to reconstruct a forensic timeline:
+### Run Locally
 
 ```bash
-recongraph -f /path/to/your/plaso-file.csv -r /path/to/your/sigma-rules-folder -o output-filename.graphml
+recongraph -f /path/to/plaso-file.csv \
+           -r /path/to/sigma/rules \
+           -o reconstruction_edge_graph.graphml
 ```
 
-### Running with Docker
-
-If you are using the Docker image, place your input file in a local `data/` folder and run:
+Add `--export-csv` and `--export-sigma` to also produce the detailed event-log
+CSV and the Sigma-labeled CSV:
 
 ```bash
-# Uses the bundled Sigma Core rules
+recongraph -f forensic_timeline.csv \
+           -r ./sigma/rules \
+           -o result.graphml \
+           --export-csv \
+           --export-sigma
+```
+
+### Run with Docker
+
+Mount your local `data/` folder into the container and pass your arguments. The
+bundled Sigma Core rules are used automatically (via `SIGMA_RULES_PATH`), so no
+`-r` is required:
+
+```bash
+# Linux / macOS
 docker run --rm -v "$(pwd)/data:/app/data" recongraph \
   -f forensic_timeline.csv \
   -o result.graphml \
   --export-csv \
   --export-sigma
+
+# Windows (PowerShell)
+docker run --rm -v "${PWD}\data:/app/data" recongraph `
+  -f forensic_timeline.csv `
+  -o result.graphml
 ```
 
-Output files (`result.graphml`, `reconstruction_event_logs.csv`, etc.) will be written back to your local `data/` folder.
+To use **your own** rules instead, mount them as an extra volume and point `-r`
+at the mount:
 
-## How to Test
+```bash
+docker run --rm \
+  -v "$(pwd)/data:/app/data" \
+  -v "$(pwd)/my_sigma_rules:/app/custom_sigma" \
+  recongraph -f forensic_timeline.csv -r /app/custom_sigma
+```
 
-To ensure that the installation is correct and the code is functioning as expected, you can run the test suite provided in the ``tests/`` directory.
+Alternatively, use **Docker Compose** (mounts `./data` automatically):
 
-1.  **Install Test Dependencies**:
-    Ensure you have ``pytest`` installed.
+```bash
+docker compose run --rm recongraph -f forensic_timeline.csv -o result.graphml
+```
 
-    ```bash
-    pip install pytest pandas pyyaml
-    ```
+> `--rm` removes the container after it finishes. All output files are written
+> back to your local `data/` folder.
 
-2.  **Run Tests**:
-    Navigate to the project root directory and execute:
+## Command-Line Options
 
-    ```bash
-    pytest -v
-    ```
-
-    You should see output indicating that all tests have passed.
+| Option | Description | Default |
+|--------|-------------|---------|
+| `-f`, `--file` | Path to the input file (CSV or TXT). **Required.** | — |
+| `-r`, `--rules` | Path to the Sigma rules directory. | `$SIGMA_RULES_PATH` if set, else none |
+| `-o`, `--output` | Output filename for the GraphML file. | `reconstruction_edge_graph.graphml` |
+| `--export-csv` | Also export detailed event logs to a CSV file. | `reconstruction_event_logs.csv` |
+| `--export-sigma` | Also export the Sigma-labeled DataFrame to a CSV file. | `<input>_sigma_labeled.csv` |
+| `--strict` | Disable flexible matching (enable strict logsource validation). | flexible mode |
 
 ## Input Data Format
 
-`recongraph` processes raw log data and applies Sigma rules to identify significant security events.
-
 ### Log File (`<filename>.csv`)
 
-A sequential log file containing system activities. The tool supports supports CSV format from Plaso (log2timeline).
+A sequential log file of system activities. `recongraph` supports the CSV format
+produced by Plaso (`log2timeline`).
 
-### Sigma Rules (`rules/` directory)
+### Sigma Rules (rules directory)
 
-A directory containing standardized Sigma rules in `.yml` format. These rules define the logic used to detect and label events within the logs.
-
-Sigma rules are downloaded from https://github.com/SigmaHQ/sigma.
-
-The content of that repository is released under the following licenses:
-
-- The Sigma specification (https://github.com/SigmaHQ/sigma-specification) and the Sigma logo are public domain
-- The rules contained in the SigmaHQ repository (https://github.com/SigmaHQ) are released under the [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License)
+A directory of standardized Sigma rules in `.yml` format that define the detection
+logic used to label events. See [Sigma Rules Setup](#sigma-rules-setup).
 
 ## Output
 
-The tool generates several files to aid in analysis:
+The tool generates the following files:
 
-- **GraphML File** (`reconstruction_edge_graph.graphml`): A directed graph where nodes are detected events and edges represent the flow between them. Suitable for visualization in Gephi or Cytoscape.
-- **Event Logs CSV** (`reconstruction_event_logs.csv`): A detailed breakdown of every log entry associated with a graph node, including timestamps and raw message content.
-- **Sigma Labeled CSV** (`<filename>_sigma_labeled.csv`): The input log file augmented with matching Sigma rule titles and severity levels.
+- **GraphML File** (`reconstruction_edge_graph.graphml`): A directed graph where
+  nodes are detected events and edges represent the flow between them. Suitable
+  for the bundled visualizer, Gephi, or Cytoscape.
+- **Event Logs CSV** (`reconstruction_event_logs.csv`, with `--export-csv`): A
+  detailed breakdown of every log entry associated with a graph node, including
+  timestamps and raw message content.
+- **Sigma Labeled CSV** (`<filename>_sigma_labeled.csv`, with `--export-sigma`):
+  The input log file augmented with matching Sigma rule titles and severity levels.
+
+## Visualizing the Graph
+
+The repository ships with a standalone, single-file web visualizer at
+[`recongraph/visualizer.html`](recongraph/visualizer.html). It requires no build
+step or server:
+
+1. Open `recongraph/visualizer.html` in a web browser.
+2. Click **Load GraphML** (or drag the file onto the page) and select your
+   `reconstruction_edge_graph.graphml`.
+
+The visualizer provides force-directed, circular, hierarchical, and radial
+layouts, severity filtering, node search, a node inspector, and SVG/JSON export.
+
+## How to Test
+
+The test suite lives in the `tests/` directory.
+
+1. **Install the test dependencies**:
+
+   ```bash
+   pip install pytest pandas pyyaml
+   ```
+
+2. **Run the tests** from the project root:
+
+   ```bash
+   pytest -v
+   ```
+
+   You should see output indicating that all tests pass.
 
 ## Documentation
- 
-Full documentation is available at [ReadTheDocs](https://recongraph.readthedocs.io/).
- 
+
+Full documentation is available at
+[ReadTheDocs](https://recongraph.readthedocs.io/).
+
 ## Licenses
- 
+
 ### ReconGraph
- 
+
 This project is licensed under the [MIT License](LICENSE).
- 
+
 ### Third-Party Licenses
- 
-This project uses **Sigma Rules** for event detection.
+
+This project uses **Sigma Rules** for event detection:
+
 - The **Sigma specification** and logo are public domain.
-- The **detection rules** from the [SigmaHQ repository](https://github.com/SigmaHQ/sigma) are released under the [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).
+- The **detection rules** from the [SigmaHQ repository](https://github.com/SigmaHQ/sigma)
+  are released under the
+  [Detection Rule License (DRL) 1.1](https://github.com/SigmaHQ/Detection-Rule-License).

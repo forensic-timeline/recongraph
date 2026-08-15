@@ -1,0 +1,6 @@
+services:
+  recongraph:
+    build: .
+    image: recongraph:latest
+    volumes:
+      - ./data:/app/data

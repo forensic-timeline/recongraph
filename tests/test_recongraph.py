@@ -98,3 +98,41 @@ def test_graphml_export(tmp_path, dummy_df):
 
     assert os.path.exists(output_file)
     assert os.path.getsize(output_file) > 0
+
+
+@pytest.mark.parametrize("label, expected", [
+    ("SSH Brute Force[high]", "high"),
+    ("Sudo Privilege Escalation[CRITICAL]", "critical"),
+    ("Some Rule[informational]", "informational"),
+    ("Event_A", ""),          # no bracket token
+    ("", ""),                 # empty label
+    ("Weird [high] middle", "high"),
+])
+def test_extract_level(label, expected):
+    """Tests severity extraction from the trailing [level] token of a sigma label."""
+    assert EdgeGraph.extract_level(label) == expected
+
+
+def test_node_level_attribute_in_graph(dummy_df):
+    """Verifies each node is enriched with a normalized 'level' attribute."""
+    builder = EdgeGraph(dummy_df)
+    builder.run_all(graph_output=str("_lvl_tmp.graphml"))
+    try:
+        crit_id = builder.events_dict["Critical Event[critical]"]
+        low_id = builder.events_dict["Low Event[low]"]
+        assert builder.G.nodes[crit_id]['level'] == "critical"
+        assert builder.G.nodes[low_id]['level'] == "low"
+    finally:
+        import os
+        if os.path.exists("_lvl_tmp.graphml"):
+            os.remove("_lvl_tmp.graphml")
+
+
+def test_graphml_contains_level_key(tmp_path, dummy_df):
+    """The exported GraphML must declare a 'level' attribute key for consumers."""
+    output_file = tmp_path / "lvl_graph.graphml"
+    builder = EdgeGraph(dummy_df)
+    builder.run_all(graph_output=str(output_file))
+    xml = output_file.read_text(encoding="utf-8")
+    assert 'attr.name="level"' in xml
+    assert ">critical<" in xml
