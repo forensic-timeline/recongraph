@@ -685,33 +685,54 @@ class EdgeGraph(object):
                     self.event_logs[event_id].append(desc_value)            
                     self.event_timestamps[event_id].append(timestamp_value) 
 
+    @staticmethod
+    def extract_level(sigma_label: str) -> str:
+        """
+        Extract the severity level from a sigma label string.
+
+        Sigma labels are formatted as ``"<Rule Title>[<level>]"`` (e.g.
+        ``"SSH Brute Force[high]"``). This function pulls the trailing
+        ``[<level>]`` token out and returns it lowercased, or an empty string
+        when no level token is present.
+        """
+        if not sigma_label:
+            return ""
+        open_idx = sigma_label.rfind("[")
+        close_idx = sigma_label.rfind("]")
+        if open_idx != -1 and close_idx != -1 and close_idx > open_idx:
+            return sigma_label[open_idx + 1:close_idx].strip().lower()
+        return ""
+
     def add_node_attributes(self):
         """
         Enrich nodes with attributes.
 
         This function adds metadata to each node in the graph, such as the first log snippet,
-        timestamp, and the count of logs associated with that event.
+        timestamp, the count of logs, and the severity level associated with that event.
         """
         for event_id in self.event_logs.keys():
             logs = self.event_logs[event_id]
             timestamps = self.event_timestamps[event_id]
-            
-            
+
+
             if logs:
                 first_log = logs[0]
             else:
                 first_log = ""
-            
+
             if timestamps:
                 first_timestamp = timestamps[0]
             else:
                 first_timestamp = ""
-            
-            
+
+
             if self.G.has_node(event_id):
                 self.G.nodes[event_id]['message'] = first_log
                 self.G.nodes[event_id]['timestamp'] = first_timestamp
                 self.G.nodes[event_id]['log_count'] = len(logs)
+                self.G.nodes[event_id]['level'] = self.extract_level(
+                    self.node_labels.get(event_id, "")
+                )
 
     def create_edges(self):
         """
@@ -884,7 +905,7 @@ def main():
     parser = argparse.ArgumentParser(description='Reconstruct a graph from forensic timeline.')
     parser.add_argument('-f', '--file', required=True, help='Path to the input file (CSV or TXT)')
     parser.add_argument('-o', '--output', help='Output filename for the GraphML file', default='reconstruction_edge_graph.graphml')
-    parser.add_argument('-r', '--rules', help='Path to the rules directory', default=None)
+    parser.add_argument('-r', '--rules', help='Path to the rules directory (defaults to the SIGMA_RULES_PATH environment variable if set)', default=os.environ.get('SIGMA_RULES_PATH'))
     parser.add_argument('--export-csv', nargs='?', const='reconstruction_event_logs.csv', default=None, help='Export detailed event logs to a separate CSV file')
     parser.add_argument('--export-sigma', nargs='?', const='AUTO', default=None, help='Export the sigma-labeled DataFrame to a CSV file')
     parser.add_argument('--strict', action='store_true', help='Disable flexible matching mode (strict validation)')
