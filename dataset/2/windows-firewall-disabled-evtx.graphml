@@ -1,0 +1,503 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d5" for="edge" attr.name="weight" attr.type="long"/>
+<key id="d4" for="node" attr.name="level" attr.type="string"/>
+<key id="d3" for="node" attr.name="log_count" attr.type="long"/>
+<key id="d2" for="node" attr.name="timestamp" attr.type="string"/>
+<key id="d1" for="node" attr.name="message" attr.type="string"/>
+<key id="d0" for="node" attr.name="event" attr.type="string"/>
+<graph edgedefault="directed"><node id="0">
+  <data key="d0">0. PUA - PingCastle Execution From Potentially Suspicious Parent[high]</data>
+  <data key="d1">manifest.json File reference: 134852-7 Parent file reference: 134850-4 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_FILE_CREATE  USN_REASON_BASIC_INFO_CHANGE</data>
+  <data key="d2">2023-12-26T23:24:37.706254+00:00</data>
+  <data key="d3">626</data>
+  <data key="d4">high</data>
+</node>
+<node id="1">
+  <data key="d0">1. Execution Of Non-Existing File[high]</data>
+  <data key="d1">safety_tips.pb File reference: 134892-4 Parent file reference: 134850-4 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_FILE_CREATE</data>
+  <data key="d2">2023-12-26T23:24:37.746359+00:00</data>
+  <data key="d3">588</data>
+  <data key="d4">high</data>
+</node>
+<node id="2">
+  <data key="d0">2. Kapeka Backdoor Execution Via RunDLL32.EXE[high]</data>
+  <data key="d1">NTFS:\Users\User\AppData\Local\Microsoft\Edge\User Data\SafetyTips\3012\_metadata Type: directory</data>
+  <data key="d2">2023-12-26T23:24:37.764244+00:00</data>
+  <data key="d3">87</data>
+  <data key="d4">high</data>
+</node>
+<node id="3">
+  <data key="d0">3. Suspicious Child Process of Notepad++ Updater - GUP.Exe[high]</data>
+  <data key="d1">manifest.fingerprint File reference: 134896-4 Parent file reference: 134850-4 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_FILE_CREATE</data>
+  <data key="d2">2023-12-26T23:24:37.796605+00:00</data>
+  <data key="d3">12</data>
+  <data key="d4">high</data>
+</node>
+<node id="4">
+  <data key="d0">4. Linux Suspicious Child Process from Node.js - React2Shell[high]</data>
+  <data key="d1">chrome_PuffinComponentUnpacker_BeginUnzipping5760_616523641 File reference: 134850-4 Parent file reference: 42582-3 Update source:  Update reason: USN_REASON_RENAME_OLD_NAME</data>
+  <data key="d2">2023-12-26T23:24:37.811740+00:00</data>
+  <data key="d3">211</data>
+  <data key="d4">high</data>
+</node>
+<node id="5">
+  <data key="d0">5. PUA - Rclone Execution[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\windows.immersivecontrolpanel_cw5n1h2txyewy\HAM\AUI\microsoft.windows.immersivecontrolpanel\V1] (empty)</data>
+  <data key="d2">2023-12-26T23:24:41.207344+00:00</data>
+  <data key="d3">91</data>
+  <data key="d4">high</data>
+</node>
+<node id="6">
+  <data key="d0">6. Suspicious PrinterPorts Creation (CVE-2020-1048)[high]</data>
+  <data key="d1">Prefetch [SYSTEMSETTINGS.EXE] was executed - run count 2 path hints: \WINDOWS\IMMERSIVECONTROLPANEL\SYSTEMSETTINGS.EXE hash: 0xC47CEF56 volume: 1 [serial number: 0x5CE1DF5A  device path: \VOLUME{01da182ce1985a64-5ce1df5a}]</data>
+  <data key="d2">2023-12-26T23:24:41.207344+00:00</data>
+  <data key="d3">116</data>
+  <data key="d4">high</data>
+</node>
+<node id="7">
+  <data key="d0">7. Qakbot Rundll32 Fake DLL Extension Execution[critical]</data>
+  <data key="d1">SystemSettings.dll File reference: 100001-1 Parent file reference: 18896-1 Update source:  Update reason: USN_REASON_EA_CHANGE</data>
+  <data key="d2">2023-12-26T23:24:41.726767+00:00</data>
+  <data key="d3">164</data>
+  <data key="d4">critical</data>
+</node>
+<node id="8">
+  <data key="d0">8. Potential CVE-2023-36874 Exploitation - Fake Wermgr.Exe Creation[high]</data>
+  <data key="d1">NTFS:\Windows\System32\ApplicationFrameHost.exe Type: file</data>
+  <data key="d2">2023-12-26T23:24:42.867622+00:00</data>
+  <data key="d3">16</data>
+  <data key="d4">high</data>
+</node>
+<node id="9">
+  <data key="d0">9. Potential CVE-2024-3400 Exploitation - Palo Alto GlobalProtect OS Command Injection[high]</data>
+  <data key="d1">[16403 / 0x4013] Provider identifier: {ef1cc15b-46c1-414e-bb95-e76b077bd51e} Source Name: Microsoft-Windows-Bits-Client Strings: ['WINDEV2311EVAL\\User'  'Edge Component Updater'  '{F09328D0-9D7D-4EE4-B8F8-8DFD0EBD8FB9}'  'WINDEV2311EVAL\\User'  '1'  'http://msedge.b.tlu.dl.delivery.mp.microsoft.com/filestreamingservice/files/2e8a592b-0ad4-414c-b996-21bd8749e2fd?P1=1703740447&amp;P2=404&amp;P3=2&amp;P4=g96v8uO9eNTa1XoPjQ89DMKJKXrqY4ambE2fqEb6LlAiEJbcX102aIYLtHkxf6JRE7dbDyirGq5uG9YUmqOyXg%3d%3d'  'C:\\Users\\User\\AppData\\Local\\Temp\\edge_BITS_5760_1236657887\\2e8a592b-0ad4-414c-b996-21bd8749e2fd'  '5760'  '3096224743817504'] Computer Name: WinDev2311Eval Record Number: 207 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:24:43.389593+00:00</data>
+  <data key="d3">25</data>
+  <data key="d4">high</data>
+</node>
+<node id="10">
+  <data key="d0">10. Windows Recall Feature Enabled Via Reg.EXE[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Tracing\SystemSettings_RASAPI32] ConsoleTracingMask: [REG_DWORD_LE] -65536 EnableAutoFileTracing: [REG_DWORD_LE] 0 EnableConsoleTracing: [REG_DWORD_LE] 0 EnableFileTracing: [REG_DWORD_LE] 0 FileDirectory: [REG_EXPAND_SZ] %windir%\tracing FileTracingMask: [REG_DWORD_LE] -65536 MaxFileSize: [REG_DWORD_LE] 1048576</data>
+  <data key="d2">2023-12-26T23:24:49.239086+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">medium</data>
+</node>
+<node id="11">
+  <data key="d0">11. Suspicious Desktopimgdownldr Command[high]</data>
+  <data key="d1">NTFS:\Windows\ImmersiveControlPanel\images\logo.targetsize-24_altform-unplated.png Type: file</data>
+  <data key="d2">2023-12-26T23:24:49.737604+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="12">
+  <data key="d0">12. Suspicious Computer Account Name Change CVE-2021-42287[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CloudStore\Store\Cache\DefaultAccount\$microsoft.quiethoursprofile.priorityonly$windows.data.notifications.quiethoursprofile\Current] Data: [REG_BINARY] (39 bytes)</data>
+  <data key="d2">2023-12-26T23:24:52.345792+00:00</data>
+  <data key="d3">14</data>
+  <data key="d4">high</data>
+</node>
+<node id="13">
+  <data key="d0">13. Suspicious VBScript UN2452 Pattern[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunNotification] StartupTNotiMicrosoftEdgeAutoLaunch_C46CFC0629905CC775E70B50EA8A519C: [REG_DWORD_LE] 1 StartupTNotiOneDrive: [REG_DWORD_LE] 1 StartupTNotiSecurityHealth: [REG_DWORD_LE] 0 StartupTNotiVMware User Process: [REG_DWORD_LE] 0</data>
+  <data key="d2">2023-12-26T23:25:13.997927+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="14">
+  <data key="d0">14. CVE-2022-24527 Microsoft Connected Cache LPE[high]</data>
+  <data key="d1">[4624 / 0x1210] Provider identifier: {54849625-5478-4994-a5ba-3e3b0328c30d} Source Name: Microsoft-Windows-Security-Auditing Strings: ['S-1-5-18'  'WINDEV2311EVAL$'  'WORKGROUP'  '0x00000000000003e7'  'S-1-5-18'  'SYSTEM'  'NT AUTHORITY'  '0x00000000000003e7'  '5'  'Advapi  '  'Negotiate'  '-'  '{00000000-0000-0000-0000-000000000000}'  '-'  '-'  '0'  '0x00000000000002e8'  'C:\\Windows\\System32\\services.exe'  '-'  '-'  '%%1833'  '-'  '-'  '-'  '-'  '%%1843'  '0x0000000000000000'  '%%1842'] Computer Name: WinDev2311Eval Record Number: 3202 Event Level: 0</data>
+  <data key="d2">2023-12-26T23:25:24.827548+00:00</data>
+  <data key="d3">16</data>
+  <data key="d4">high</data>
+</node>
+<node id="15">
+  <data key="d0">15. HackTool - RemoteKrbRelay Execution[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Control Panel\International\LanguageComponentsAvailable] AvailableAdvancedSpeechFeatures: [REG_MULTI_SZ] [fr-CA  en-GB  es-MX  da  es-ES  fr-FR  en-IE  en-CA  zh-Hans-CN  zh-Hant-HK  pt-PT  en-US  en-NZ  de-DE  zh-Hant-TW  en-AU  pt-BR  ko  it-IT  en-IN  ja] AvailableAdvancedTTSFeatures: [REG_MULTI_SZ] [es-MX  es-ES  fr-FR  pt-BR  de-DE  zh-Hans-CN  ja  en-GB  en-IN  en-US  ko] AvailableHandwritingFeatures: [REG_MULTI_SZ] [zh-CN  cs-CZ  xh-ZA  sl-SI  en-US  rw-RW  de-DE  af-ZA  gd-GB  da-DK  en-GB  ca-ES  nl-NL  hr-HR  bs-LATN-BA  ja-JP  cy-GB  rm-CH  el-GR  ms-BN  fr-FR  es-ES  tn-ZA  es-MX  eu-ES  fi-FI  ga-IE  nso-ZA  gl-ES  hi-IN  sw-KE  it-IT  hu-HU  id-ID  ko-KR  lb-LU  mi-NZ  ms-MY  nb-NO  nn-NO  pt-BR  pl-PL  pt-PT  ro-RO  ru-RU  sk-SK  sr-CYRL-RS  sq-AL  sr-LATN-RS  sv-SE  tr-TR  wo-SN  zh-HK  zh-TW  zu-ZA] AvailableLanguagePacks: [REG_MULTI_SZ] [az-latn-az  de-de  bg-bg  af-za  fa-ir  be-by  he-il  as-in  gl-es  km-kh  ar-sa  am-et  bn-in  da-dk  gd-gb  ka-ge  uz-latn-uz  hu-hu  it-it  es-mx  te-in  mk-mk  es-es  ml-in  fr-fr  kn-in  th-th  pt-br  pl-pl  is-is  or-in  hr-hr  nl-nl  chr-cher-us  bs-latn-ba  lv-lv  uk-ua  mr-in  kok-in  ca-es  en-gb  fr-ca  ca-es-valencia  et-ee  zh-cn  cs-cz  gu-in  cy-gb  ja-jp  el-gr  eu-es  sl-si  en-us  kk-kz  mi-nz  fi-fi  id-id  fil-ph  lt-lt  ga-ie  pa-in  hi-in  lo-la  ko-kr  hy-am  lb-lu  ms-my  ur-pk  ro-ro  mt-mt  sr-cyrl-rs  sq-al  ne-np  ug-cn  nb-no  nn-no  pt-pt  quz-pe  ru-ru  sk-sk  sr-cyrl-ba  sr-latn-rs  sv-se  ta-in  tr-tr  tt-ru  vi-vn  zh-tw] AvailableSpeechFeatures: [REG_MULTI_SZ] [en-US  fr-CA  en-GB  da-DK  en-IN  de-DE  en-AU  en-CA  fr-FR  es-ES  es-MX  it-IT  ja-JP  pt-BR  zh-CN  zh-HK  zh-TW] AvailableTextToSpeechFeatures: [REG_MULTI_SZ] [zh-CN  cs-CZ  sl-SI  en-US  ar-SA  ar-EG  de-DE  bg-BG  de-CH  da-DK  fr-CA  en-GB  ca-ES  fi-FI  de-AT  en-IN  el-GR  en-AU  en-CA  nl-BE  en-IE  fr-FR  es-ES  es-MX  fr-CH  he-IL  hi-IN  nl-NL  hr-HR  it-IT  hu-HU  id-ID  ja-JP  ko-KR  ms-MY  nb-NO  th-TH  pt-BR  pl-PL  pt-PT  ro-RO  ru-RU  sk-SK  sv-SE  ta-IN  tr-TR  vi-VN  zh-HK  zh-TW]</data>
+  <data key="d2">2023-12-26T23:25:30.750905+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="16">
+  <data key="d0">16. HackTool - SysmonEnte Execution[high]</data>
+  <data key="d1">NTFS:\Program Files\WindowsApps\Microsoft.WindowsCalculator_11.2307.4.0_x64__8wekyb3d8bbwe\Assets\CalculatorAppList.targetsize-32.png Type: file</data>
+  <data key="d2">2023-12-26T23:26:24.360549+00:00</data>
+  <data key="d3">6</data>
+  <data key="d4">high</data>
+</node>
+<node id="17">
+  <data key="d0">17. Suspicious Microsoft OneNote Child Process[high]</data>
+  <data key="d1">[10002 / 0x2712] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['6'  'Microsoft.WindowsAppRuntime.CBS_4000.1027.2341.0_x64__8wekyb3d8bbwe'  'C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\e43f305b-2187-4195-97d3-f115e81e31ad_S-1-5-21-4087375726-1105420669-2909453743-1000_29.rslc'] Computer Name: WinDev2311Eval Record Number: 7912 Event Level: 5</data>
+  <data key="d2">2023-12-26T23:26:36.672340+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">high</data>
+</node>
+<node id="18">
+  <data key="d0">18. Regsvr32 Execution From Highly Suspicious Location[high]</data>
+  <data key="d1">[854 / 0x0356] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: [' C:\\Windows\\SystemApps\\Microsoft.WindowsAppRuntime.CBS_8wekyb3d8bbwe\\AppxManifest.xml'] Computer Name: WinDev2311Eval Record Number: 7914 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:26:36.684068+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">high</data>
+</node>
+<node id="19">
+  <data key="d0">19. Windows AMSI Related Registry Tampering Via CommandLine[high]</data>
+  <data key="d1">[855 / 0x0357] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: [' addPackageList: Microsoft.WindowsAppRuntime.CBS_4000.1027.2341.0_x64__8wekyb3d8bbwe'] Computer Name: WinDev2311Eval Record Number: 7915 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:26:36.736922+00:00</data>
+  <data key="d3">3</data>
+  <data key="d4">high</data>
+</node>
+<node id="20">
+  <data key="d0">20. Kapeka Backdoor Configuration Persistence[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Group Policy\DataStore\Machine] (empty)</data>
+  <data key="d2">2023-12-26T23:26:38.592808+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">medium</data>
+</node>
+<node id="21">
+  <data key="d0">21. Antivirus - Relevant File Paths Alerts Signature[high]</data>
+  <data key="d1">NTFS:\Windows\ServiceProfiles Type: directory</data>
+  <data key="d2">2023-12-26T23:26:57.670859+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="22">
+  <data key="d0">22. Suspicious Spool Service Child Process[high]</data>
+  <data key="d1">[7040 / 0x1b80] Provider identifier: {555908d1-a6d7-4695-8e1e-26931d2012f4} Source Name: Service Control Manager Strings: ['IKE and AuthIP IPsec Keying Modules'  'demand start'  'auto start'  'IKEEXT'] Computer Name: WinDev2311Eval Record Number: 1746 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:26:58.945537+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">high</data>
+</node>
+<node id="23">
+  <data key="d0">23. Suspicious DumpMinitool Execution[high]</data>
+  <data key="d1">bnpl.bundle.js.LICENSE.txt File reference: 135265-6 Parent file reference: 135263-6 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_FILE_CREATE</data>
+  <data key="d2">2023-12-26T23:27:08.929107+00:00</data>
+  <data key="d3">12</data>
+  <data key="d4">high</data>
+</node>
+<edge source="0" target="0" id="0">
+  <data key="d5">518</data>
+</edge>
+<edge source="0" target="1" id="0">
+  <data key="d5">97</data>
+</edge>
+<edge source="0" target="2" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="0" target="4" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="0" target="23" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="1" target="1" id="0">
+  <data key="d5">436</data>
+</edge>
+<edge source="1" target="2" id="0">
+  <data key="d5">13</data>
+</edge>
+<edge source="1" target="4" id="0">
+  <data key="d5">24</data>
+</edge>
+<edge source="1" target="7" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="1" target="5" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="1" target="6" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="1" target="17" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="1" target="19" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="1" target="20" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="1" target="0" id="0">
+  <data key="d5">97</data>
+</edge>
+<edge source="2" target="0" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="2" target="2" id="0">
+  <data key="d5">55</data>
+</edge>
+<edge source="2" target="3" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="1" id="0">
+  <data key="d5">11</data>
+</edge>
+<edge source="2" target="6" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="2" target="5" id="0">
+  <data key="d5">7</data>
+</edge>
+<edge source="2" target="12" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="15" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="4" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="7" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="3" target="3" id="0">
+  <data key="d5">7</data>
+</edge>
+<edge source="3" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="3" target="0" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="3" target="4" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="4" target="2" id="0">
+  <data key="d5">7</data>
+</edge>
+<edge source="4" target="1" id="0">
+  <data key="d5">15</data>
+</edge>
+<edge source="4" target="4" id="0">
+  <data key="d5">137</data>
+</edge>
+<edge source="4" target="5" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="4" target="6" id="0">
+  <data key="d5">13</data>
+</edge>
+<edge source="4" target="7" id="0">
+  <data key="d5">16</data>
+</edge>
+<edge source="4" target="9" id="0">
+  <data key="d5">8</data>
+</edge>
+<edge source="4" target="10" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="11" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="3" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="4" target="13" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="0" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="12" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="16" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="5" target="5" id="0">
+  <data key="d5">52</data>
+</edge>
+<edge source="5" target="6" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="5" target="1" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="5" target="4" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="5" target="12" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="5" target="2" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="5" target="7" id="0">
+  <data key="d5">10</data>
+</edge>
+<edge source="5" target="14" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="6" id="0">
+  <data key="d5">79</data>
+</edge>
+<edge source="6" target="4" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="6" target="7" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="6" target="12" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="9" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="1" id="0">
+  <data key="d5">8</data>
+</edge>
+<edge source="6" target="8" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="6" target="5" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="6" target="18" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="21" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="7" target="7" id="0">
+  <data key="d5">120</data>
+</edge>
+<edge source="7" target="4" id="0">
+  <data key="d5">21</data>
+</edge>
+<edge source="7" target="8" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="7" target="5" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="7" target="14" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="7" target="6" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="7" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="7" target="22" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="8" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="8" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="4" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="8" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="7" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="9" target="9" id="0">
+  <data key="d5">16</data>
+</edge>
+<edge source="9" target="4" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="9" target="1" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="9" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="10" target="10" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="10" target="4" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="11" target="8" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="12" target="12" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="12" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="12" target="7" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="12" target="5" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="13" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="14" target="14" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="14" target="7" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="14" target="6" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="14" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="15" target="4" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="16" target="16" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="16" target="4" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="17" target="17" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="17" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="18" target="18" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="18" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="19" target="19" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="19" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="19" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="20" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="21" target="14" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="22" target="22" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="22" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="23" target="23" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="23" target="0" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="23" target="1" id="0">
+  <data key="d5">1</data>
+</edge>
+</graph></graphml>

@@ -1,0 +1,94 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "label": "0. Remote File Copy[low]",
+      "level": "low",
+      "count": 1869,
+      "timestamp": "2023-12-26T23:24:37.706254+00:00"
+    },
+    {
+      "id": "1",
+      "label": "1. Enumeration via the Global Catalog[medium]",
+      "level": "medium",
+      "count": 15,
+      "timestamp": "2023-12-26T23:24:41.207344+00:00"
+    },
+    {
+      "id": "2",
+      "label": "2. Rare Schtasks Creations[low]",
+      "level": "low",
+      "count": 77,
+      "timestamp": "2023-12-26T23:24:43.324021+00:00"
+    },
+    {
+      "id": "3",
+      "label": "3. Remote Schtasks Creation[medium]",
+      "level": "medium",
+      "count": 16,
+      "timestamp": "2023-12-26T23:25:24.827548+00:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "0",
+      "target": "0",
+      "weight": "1838"
+    },
+    {
+      "source": "0",
+      "target": "1",
+      "weight": "7"
+    },
+    {
+      "source": "0",
+      "target": "2",
+      "weight": "21"
+    },
+    {
+      "source": "0",
+      "target": "3",
+      "weight": "2"
+    },
+    {
+      "source": "1",
+      "target": "1",
+      "weight": "8"
+    },
+    {
+      "source": "1",
+      "target": "0",
+      "weight": "7"
+    },
+    {
+      "source": "2",
+      "target": "2",
+      "weight": "55"
+    },
+    {
+      "source": "2",
+      "target": "0",
+      "weight": "20"
+    },
+    {
+      "source": "2",
+      "target": "3",
+      "weight": "2"
+    },
+    {
+      "source": "3",
+      "target": "3",
+      "weight": "12"
+    },
+    {
+      "source": "3",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "3",
+      "target": "0",
+      "weight": "3"
+    }
+  ]
+}
