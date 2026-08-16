@@ -12,7 +12,9 @@ By parsing sequential log data and mapping them to events identified via **Sigma
    introduction
    installation
    usage
+   examples
    data_format
+   test
    api
    license
    changelog

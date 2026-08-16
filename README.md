@@ -30,6 +30,7 @@ This tool is based on the paper:
 - [Input Data Format](#input-data-format)
 - [Output](#output)
 - [Visualizing the Graph](#visualizing-the-graph)
+- [Examples](#examples)
 - [How to Test](#how-to-test)
 - [Documentation](#documentation)
 - [Licenses](#licenses)
@@ -262,6 +263,23 @@ step or server:
 The visualizer provides force-directed, circular, hierarchical, and radial
 layouts, severity filtering, node search, a node inspector, and SVG/JSON export.
 
+## Examples
+
+The [`dataset/`](dataset/) folder contains ready-made sample datasets, each with
+its source Plaso CSV, the resulting GraphML, and the SVG/JSON exported from the
+visualizer:
+
+| # | Scenario / behavior | Folder |
+|---|---------------------|--------|
+| 1 | Credential access — failed logins | [`dataset/1/`](dataset/1/) |
+| 2 | Defense evasion — Windows Firewall disabled (EVTX) | [`dataset/2/`](dataset/2/) |
+| 3 | Anti-forensics — system time change (Event ID 4616) | [`dataset/3/`](dataset/3/) |
+
+For a full step-by-step walkthrough on reproducing these samples (generating the
+GraphML, exporting SVG/JSON, and a flexible-vs-strict comparison), see the
+[Examples & Sample Datasets](https://recongraph.readthedocs.io/en/latest/examples.html)
+page in the documentation.
+
 ## How to Test
 
 The test suite lives in the `tests/` directory.
@@ -283,7 +301,9 @@ The test suite lives in the `tests/` directory.
 ## Documentation
 
 Full documentation is available at
-[ReadTheDocs](https://recongraph.readthedocs.io/).
+[ReadTheDocs](https://recongraph.readthedocs.io/), including a step-by-step
+[Examples & Sample Datasets](https://recongraph.readthedocs.io/en/latest/examples.html)
+walkthrough.
 
 ## Licenses
 
