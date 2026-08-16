@@ -1,0 +1,829 @@
+{
+  "nodes": [
+    {
+      "id": "0",
+      "label": "0. HackTool - SysmonEnte Execution[high]",
+      "level": "high",
+      "count": 464,
+      "timestamp": "2023-12-20T23:46:16.000000+00:00"
+    },
+    {
+      "id": "1",
+      "label": "1. Qakbot Rundll32 Fake DLL Extension Execution[critical]",
+      "level": "critical",
+      "count": 237,
+      "timestamp": "2023-12-20T23:46:16.000000+00:00"
+    },
+    {
+      "id": "2",
+      "label": "2. Execution Of Non-Existing File[high]",
+      "level": "high",
+      "count": 426,
+      "timestamp": "2023-12-20T23:46:16.000000+00:00"
+    },
+    {
+      "id": "3",
+      "label": "3. File Creation by Office Applications[high]",
+      "level": "high",
+      "count": 29,
+      "timestamp": "2023-12-20T23:46:16.000000+00:00"
+    },
+    {
+      "id": "4",
+      "label": "4. Suspicious PrinterPorts Creation (CVE-2020-1048)[high]",
+      "level": "high",
+      "count": 71,
+      "timestamp": "2023-12-20T23:46:16.000000+00:00"
+    },
+    {
+      "id": "5",
+      "label": "5. Kapeka Backdoor Execution Via RunDLL32.EXE[high]",
+      "level": "high",
+      "count": 244,
+      "timestamp": "2023-12-21T16:45:42.000000+00:00"
+    },
+    {
+      "id": "6",
+      "label": "6. Linux Suspicious Child Process from Node.js - React2Shell[high]",
+      "level": "high",
+      "count": 227,
+      "timestamp": "2023-12-25T13:31:36.000000+00:00"
+    },
+    {
+      "id": "7",
+      "label": "7. Potential CVE-2024-3400 Exploitation - Palo Alto GlobalProtect OS Command Injection[high]",
+      "level": "high",
+      "count": 7,
+      "timestamp": "2023-12-25T22:40:10.000000+00:00"
+    },
+    {
+      "id": "8",
+      "label": "8. PUA - Rclone Execution[high]",
+      "level": "high",
+      "count": 43,
+      "timestamp": "2023-12-26T16:24:56.511132+00:00"
+    },
+    {
+      "id": "9",
+      "label": "9. Potential CVE-2023-36874 Exploitation - Fake Wermgr.Exe Creation[high]",
+      "level": "high",
+      "count": 169,
+      "timestamp": "2023-12-27T00:16:59.879656+00:00"
+    },
+    {
+      "id": "10",
+      "label": "10. Windows Suspicious Child Process from Node.js - React2Shell[high]",
+      "level": "high",
+      "count": 7,
+      "timestamp": "2023-12-27T00:16:59.893703+00:00"
+    },
+    {
+      "id": "11",
+      "label": "11. CVE-2022-24527 Microsoft Connected Cache LPE[high]",
+      "level": "high",
+      "count": 16,
+      "timestamp": "2023-12-27T00:16:59.896679+00:00"
+    },
+    {
+      "id": "12",
+      "label": "12. Remote Schtasks Creation[medium]",
+      "level": "medium",
+      "count": 2,
+      "timestamp": "2023-12-27T00:16:59.951914+00:00"
+    },
+    {
+      "id": "13",
+      "label": "13. Potential PlugX Activity[high]",
+      "level": "high",
+      "count": 2,
+      "timestamp": "2023-12-27T00:17:00.130349+00:00"
+    },
+    {
+      "id": "14",
+      "label": "14. Antivirus - Ransomware Signature[critical]",
+      "level": "critical",
+      "count": 6,
+      "timestamp": "2023-12-27T00:17:00.306691+00:00"
+    },
+    {
+      "id": "15",
+      "label": "15. Windows AMSI Related Registry Tampering Via CommandLine[high]",
+      "level": "high",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:00.894446+00:00"
+    },
+    {
+      "id": "16",
+      "label": "16. PUA - PingCastle Execution From Potentially Suspicious Parent[high]",
+      "level": "high",
+      "count": 7,
+      "timestamp": "2023-12-27T00:17:00.959282+00:00"
+    },
+    {
+      "id": "17",
+      "label": "17. Windows Recall Feature Enabled Via Reg.EXE[medium]",
+      "level": "medium",
+      "count": 11,
+      "timestamp": "2023-12-27T00:17:01.185384+00:00"
+    },
+    {
+      "id": "18",
+      "label": "18. Lazarus Loaders[critical]",
+      "level": "critical",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:01.637962+00:00"
+    },
+    {
+      "id": "19",
+      "label": "19. Regsvr32 Execution From Highly Suspicious Location[high]",
+      "level": "high",
+      "count": 2,
+      "timestamp": "2023-12-27T00:17:02.000000+00:00"
+    },
+    {
+      "id": "20",
+      "label": "20. High DNS subdomain requests rate per domain[high]",
+      "level": "high",
+      "count": 4,
+      "timestamp": "2023-12-27T00:17:02.795886+00:00"
+    },
+    {
+      "id": "21",
+      "label": "21. Remote File Download Via Findstr.EXE[medium]",
+      "level": "medium",
+      "count": 4,
+      "timestamp": "2023-12-27T00:17:02.804645+00:00"
+    },
+    {
+      "id": "22",
+      "label": "22. Suspicious DumpMinitool Execution[high]",
+      "level": "high",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:03.257817+00:00"
+    },
+    {
+      "id": "23",
+      "label": "23. ETW Logging/Processing Option Disabled On IIS Server[medium]",
+      "level": "medium",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:05.390868+00:00"
+    },
+    {
+      "id": "24",
+      "label": "24. Kapeka Backdoor Configuration Persistence[medium]",
+      "level": "medium",
+      "count": 12,
+      "timestamp": "2023-12-27T00:17:06.136576+00:00"
+    },
+    {
+      "id": "25",
+      "label": "25. Suspicious FileFix Execution Pattern[high]",
+      "level": "high",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:06.375624+00:00"
+    },
+    {
+      "id": "26",
+      "label": "26. Antivirus - Relevant File Paths Alerts Signature[high]",
+      "level": "high",
+      "count": 4,
+      "timestamp": "2023-12-27T00:17:06.859500+00:00"
+    },
+    {
+      "id": "27",
+      "label": "27. Suspicious DNS Z Flag Bit Set[medium]",
+      "level": "medium",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:06.941842+00:00"
+    },
+    {
+      "id": "28",
+      "label": "28. Potentially Suspicious Long Filename Pattern - Linux[low]",
+      "level": "low",
+      "count": 1,
+      "timestamp": "2023-12-27T00:17:06.957114+00:00"
+    }
+  ],
+  "edges": [
+    {
+      "source": "0",
+      "target": "0",
+      "weight": "440"
+    },
+    {
+      "source": "0",
+      "target": "1",
+      "weight": "13"
+    },
+    {
+      "source": "0",
+      "target": "3",
+      "weight": "6"
+    },
+    {
+      "source": "0",
+      "target": "4",
+      "weight": "4"
+    },
+    {
+      "source": "0",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "1",
+      "target": "2",
+      "weight": "5"
+    },
+    {
+      "source": "1",
+      "target": "1",
+      "weight": "178"
+    },
+    {
+      "source": "1",
+      "target": "0",
+      "weight": "12"
+    },
+    {
+      "source": "1",
+      "target": "3",
+      "weight": "9"
+    },
+    {
+      "source": "1",
+      "target": "4",
+      "weight": "11"
+    },
+    {
+      "source": "1",
+      "target": "5",
+      "weight": "3"
+    },
+    {
+      "source": "1",
+      "target": "7",
+      "weight": "2"
+    },
+    {
+      "source": "1",
+      "target": "6",
+      "weight": "14"
+    },
+    {
+      "source": "1",
+      "target": "8",
+      "weight": "2"
+    },
+    {
+      "source": "1",
+      "target": "11",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "0",
+      "weight": "2"
+    },
+    {
+      "source": "2",
+      "target": "1",
+      "weight": "6"
+    },
+    {
+      "source": "2",
+      "target": "5",
+      "weight": "13"
+    },
+    {
+      "source": "2",
+      "target": "6",
+      "weight": "29"
+    },
+    {
+      "source": "2",
+      "target": "2",
+      "weight": "354"
+    },
+    {
+      "source": "2",
+      "target": "4",
+      "weight": "2"
+    },
+    {
+      "source": "2",
+      "target": "11",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "12",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "13",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "8",
+      "weight": "4"
+    },
+    {
+      "source": "2",
+      "target": "9",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "17",
+      "weight": "3"
+    },
+    {
+      "source": "2",
+      "target": "23",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "10",
+      "weight": "2"
+    },
+    {
+      "source": "2",
+      "target": "19",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "24",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "25",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "16",
+      "weight": "1"
+    },
+    {
+      "source": "2",
+      "target": "28",
+      "weight": "1"
+    },
+    {
+      "source": "3",
+      "target": "1",
+      "weight": "8"
+    },
+    {
+      "source": "3",
+      "target": "4",
+      "weight": "4"
+    },
+    {
+      "source": "3",
+      "target": "0",
+      "weight": "5"
+    },
+    {
+      "source": "3",
+      "target": "3",
+      "weight": "12"
+    },
+    {
+      "source": "4",
+      "target": "4",
+      "weight": "50"
+    },
+    {
+      "source": "4",
+      "target": "0",
+      "weight": "3"
+    },
+    {
+      "source": "4",
+      "target": "1",
+      "weight": "14"
+    },
+    {
+      "source": "4",
+      "target": "3",
+      "weight": "2"
+    },
+    {
+      "source": "4",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "4",
+      "target": "11",
+      "weight": "1"
+    },
+    {
+      "source": "5",
+      "target": "5",
+      "weight": "216"
+    },
+    {
+      "source": "5",
+      "target": "1",
+      "weight": "3"
+    },
+    {
+      "source": "5",
+      "target": "6",
+      "weight": "12"
+    },
+    {
+      "source": "5",
+      "target": "7",
+      "weight": "1"
+    },
+    {
+      "source": "5",
+      "target": "8",
+      "weight": "2"
+    },
+    {
+      "source": "5",
+      "target": "9",
+      "weight": "2"
+    },
+    {
+      "source": "5",
+      "target": "2",
+      "weight": "5"
+    },
+    {
+      "source": "5",
+      "target": "24",
+      "weight": "3"
+    },
+    {
+      "source": "6",
+      "target": "5",
+      "weight": "8"
+    },
+    {
+      "source": "6",
+      "target": "6",
+      "weight": "114"
+    },
+    {
+      "source": "6",
+      "target": "9",
+      "weight": "52"
+    },
+    {
+      "source": "6",
+      "target": "10",
+      "weight": "2"
+    },
+    {
+      "source": "6",
+      "target": "2",
+      "weight": "35"
+    },
+    {
+      "source": "6",
+      "target": "13",
+      "weight": "1"
+    },
+    {
+      "source": "6",
+      "target": "14",
+      "weight": "1"
+    },
+    {
+      "source": "6",
+      "target": "8",
+      "weight": "3"
+    },
+    {
+      "source": "6",
+      "target": "1",
+      "weight": "7"
+    },
+    {
+      "source": "6",
+      "target": "16",
+      "weight": "1"
+    },
+    {
+      "source": "6",
+      "target": "18",
+      "weight": "1"
+    },
+    {
+      "source": "6",
+      "target": "0",
+      "weight": "1"
+    },
+    {
+      "source": "6",
+      "target": "24",
+      "weight": "1"
+    },
+    {
+      "source": "7",
+      "target": "7",
+      "weight": "3"
+    },
+    {
+      "source": "7",
+      "target": "2",
+      "weight": "2"
+    },
+    {
+      "source": "7",
+      "target": "8",
+      "weight": "2"
+    },
+    {
+      "source": "8",
+      "target": "7",
+      "weight": "1"
+    },
+    {
+      "source": "8",
+      "target": "8",
+      "weight": "30"
+    },
+    {
+      "source": "8",
+      "target": "2",
+      "weight": "6"
+    },
+    {
+      "source": "8",
+      "target": "5",
+      "weight": "2"
+    },
+    {
+      "source": "8",
+      "target": "11",
+      "weight": "1"
+    },
+    {
+      "source": "8",
+      "target": "1",
+      "weight": "2"
+    },
+    {
+      "source": "8",
+      "target": "17",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "9",
+      "weight": "112"
+    },
+    {
+      "source": "9",
+      "target": "6",
+      "weight": "44"
+    },
+    {
+      "source": "9",
+      "target": "1",
+      "weight": "4"
+    },
+    {
+      "source": "9",
+      "target": "15",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "2",
+      "weight": "3"
+    },
+    {
+      "source": "9",
+      "target": "5",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "19",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "20",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "17",
+      "weight": "1"
+    },
+    {
+      "source": "9",
+      "target": "22",
+      "weight": "1"
+    },
+    {
+      "source": "10",
+      "target": "10",
+      "weight": "3"
+    },
+    {
+      "source": "10",
+      "target": "2",
+      "weight": "2"
+    },
+    {
+      "source": "10",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "10",
+      "target": "26",
+      "weight": "1"
+    },
+    {
+      "source": "11",
+      "target": "11",
+      "weight": "12"
+    },
+    {
+      "source": "11",
+      "target": "2",
+      "weight": "3"
+    },
+    {
+      "source": "11",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "12",
+      "target": "12",
+      "weight": "1"
+    },
+    {
+      "source": "12",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "13",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "13",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "14",
+      "target": "14",
+      "weight": "5"
+    },
+    {
+      "source": "14",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "15",
+      "target": "9",
+      "weight": "1"
+    },
+    {
+      "source": "16",
+      "target": "16",
+      "weight": "4"
+    },
+    {
+      "source": "16",
+      "target": "5",
+      "weight": "1"
+    },
+    {
+      "source": "16",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "16",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "17",
+      "target": "17",
+      "weight": "6"
+    },
+    {
+      "source": "17",
+      "target": "6",
+      "weight": "3"
+    },
+    {
+      "source": "17",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "17",
+      "target": "27",
+      "weight": "1"
+    },
+    {
+      "source": "18",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "19",
+      "target": "16",
+      "weight": "1"
+    },
+    {
+      "source": "19",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "20",
+      "target": "20",
+      "weight": "3"
+    },
+    {
+      "source": "20",
+      "target": "21",
+      "weight": "1"
+    },
+    {
+      "source": "21",
+      "target": "21",
+      "weight": "3"
+    },
+    {
+      "source": "21",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "22",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "23",
+      "target": "6",
+      "weight": "1"
+    },
+    {
+      "source": "24",
+      "target": "2",
+      "weight": "5"
+    },
+    {
+      "source": "24",
+      "target": "24",
+      "weight": "5"
+    },
+    {
+      "source": "24",
+      "target": "1",
+      "weight": "2"
+    },
+    {
+      "source": "25",
+      "target": "2",
+      "weight": "1"
+    },
+    {
+      "source": "26",
+      "target": "26",
+      "weight": "3"
+    },
+    {
+      "source": "26",
+      "target": "9",
+      "weight": "1"
+    },
+    {
+      "source": "27",
+      "target": "24",
+      "weight": "1"
+    },
+    {
+      "source": "28",
+      "target": "24",
+      "weight": "1"
+    }
+  ]
+}

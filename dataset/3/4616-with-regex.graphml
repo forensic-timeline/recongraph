@@ -1,0 +1,583 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d5" for="edge" attr.name="weight" attr.type="long"/>
+<key id="d4" for="node" attr.name="level" attr.type="string"/>
+<key id="d3" for="node" attr.name="log_count" attr.type="long"/>
+<key id="d2" for="node" attr.name="timestamp" attr.type="string"/>
+<key id="d1" for="node" attr.name="message" attr.type="string"/>
+<key id="d0" for="node" attr.name="event" attr.type="string"/>
+<graph edgedefault="directed"><node id="0">
+  <data key="d0">0. HackTool - SysmonEnte Execution[high]</data>
+  <data key="d1">NTFS:\Program Files (x86)\Microsoft\EdgeWebView\Application\120.0.2210.91\ResiliencyLinks\Locales\fr-CA.pak.DATA Type: file</data>
+  <data key="d2">2023-12-20T23:46:16.000000+00:00</data>
+  <data key="d3">464</data>
+  <data key="d4">high</data>
+</node>
+<node id="1">
+  <data key="d0">1. Qakbot Rundll32 Fake DLL Extension Execution[critical]</data>
+  <data key="d1">PE Type: Dynamic Link Library (DLL) Import hash: 0c52c5bf0043ebb7c5fc3f50c571c69f Export DLL name: augloop_client.dll</data>
+  <data key="d2">2023-12-20T23:46:16.000000+00:00</data>
+  <data key="d3">237</data>
+  <data key="d4">critical</data>
+</node>
+<node id="2">
+  <data key="d0">2. Execution Of Non-Existing File[high]</data>
+  <data key="d1">PE Type: Executable (EXE) Import hash: 93623b0f02883b108b7f1e14b1da842c</data>
+  <data key="d2">2023-12-20T23:46:16.000000+00:00</data>
+  <data key="d3">426</data>
+  <data key="d4">high</data>
+</node>
+<node id="3">
+  <data key="d0">3. File Creation by Office Applications[high]</data>
+  <data key="d1">PE Type: Executable (EXE) Import hash: ec3d37729acbe5a05a8129df446445d1 Export DLL name: elevation_service.exe</data>
+  <data key="d2">2023-12-20T23:46:16.000000+00:00</data>
+  <data key="d3">29</data>
+  <data key="d4">high</data>
+</node>
+<node id="4">
+  <data key="d0">4. Suspicious PrinterPorts Creation (CVE-2020-1048)[high]</data>
+  <data key="d1">NTFS:\Program Files (x86)\Microsoft\EdgeWebView\Application\120.0.2210.91\identity_proxy\beta.identity_helper.exe.manifest Type: file</data>
+  <data key="d2">2023-12-20T23:46:16.000000+00:00</data>
+  <data key="d3">71</data>
+  <data key="d4">high</data>
+</node>
+<node id="5">
+  <data key="d0">5. Kapeka Backdoor Execution Via RunDLL32.EXE[high]</data>
+  <data key="d1">NTFS:\Users\User\AppData\Local\Microsoft\Edge\User Data\SafetyTips\3012\_metadata\verified_contents.json Type: file</data>
+  <data key="d2">2023-12-21T16:45:42.000000+00:00</data>
+  <data key="d3">244</data>
+  <data key="d4">high</data>
+</node>
+<node id="6">
+  <data key="d0">6. Linux Suspicious Child Process from Node.js - React2Shell[high]</data>
+  <data key="d1">NTFS:\Users\User\AppData\Local\Microsoft\Edge\User Data\Edge Wallet\120.16992.16988.1\Notification\_manifest\spdx_2.2\manifest.cat Type: file</data>
+  <data key="d2">2023-12-25T13:31:36.000000+00:00</data>
+  <data key="d3">227</data>
+  <data key="d4">high</data>
+</node>
+<node id="7">
+  <data key="d0">7. Potential CVE-2024-3400 Exploitation - Palo Alto GlobalProtect OS Command Injection[high]</data>
+  <data key="d1">URL: https://static-ecst.licdn.com/apc/trans.gif?75ac51363d5971f354bc5d0202dbf677 Access count: 1 Synchronization count: 0 Filename: trans[1].gif Cached file size: 43 Response headers: [HTTP/1.1 200; accept-ranges: bytes; access-control-allow-origin: *; access-control-expose-headers: X-CDN  X-CDN-Client-IP-Version  X-CDN-Proto  X-Cache  X-CDN-RCODE; content-type: image/gif; date: Wed  27 Dec 2023 00:37:54 GMT; timing-allow-origin: *; x-cache: HIT; x-cdn: ECST; x-cdn-client-ip-version: IPV4; x-cdn-proto: HTTP2; x-content-type-options: nosniff; x-li-fabric: prod-ltx1; x-li-pop: prod-ltx1-x; x-li-proto: http/1.1; x-li-uuid: AAYNXT+a0A482WbSWdWCOQ==; content-length: 43] Entry identifier: 95 Container identifier: 3 Cache identifier: 0</data>
+  <data key="d2">2023-12-25T22:40:10.000000+00:00</data>
+  <data key="d3">7</data>
+  <data key="d4">high</data>
+</node>
+<node id="8">
+  <data key="d0">8. PUA - Rclone Execution[high]</data>
+  <data key="d1">URL: :2023122620231227: User@:Host: login.live.com Access count: 1 Synchronization count: 0 Cached file size: 0 Entry identifier: 2 Container identifier: 7 Cache identifier: 0</data>
+  <data key="d2">2023-12-26T16:24:56.511132+00:00</data>
+  <data key="d3">43</data>
+  <data key="d4">high</data>
+</node>
+<node id="9">
+  <data key="d0">9. Potential CVE-2023-36874 Exploitation - Fake Wermgr.Exe Creation[high]</data>
+  <data key="d1">NTFS:\Windows\System32\Tasks\Microsoft\Windows\UpdateOrchestrator\UUS Failover Task Type: file</data>
+  <data key="d2">2023-12-27T00:16:59.879656+00:00</data>
+  <data key="d3">169</data>
+  <data key="d4">high</data>
+</node>
+<node id="10">
+  <data key="d0">10. Windows Suspicious Child Process from Node.js - React2Shell[high]</data>
+  <data key="d1">[1038 / 0x040e] Provider identifier: {d48ce617-33a2-4bc3-a5c7-11aa4f29619e} Source Name: Microsoft-Windows-SMBServer Strings: ['3'  '58'  '\\Device\\NetBT_Tcpip_{745E29BE-E8A2-4BFC-BCE0-385E82A51249}'  '0x00000102'] Computer Name: WinDev2311Eval Record Number: 99 Event Level: 4</data>
+  <data key="d2">2023-12-27T00:16:59.893703+00:00</data>
+  <data key="d3">7</data>
+  <data key="d4">high</data>
+</node>
+<node id="11">
+  <data key="d0">11. CVE-2022-24527 Microsoft Connected Cache LPE[high]</data>
+  <data key="d1">[4616 / 0x1208] Provider identifier: {54849625-5478-4994-a5ba-3e3b0328c30d} Source Name: Microsoft-Windows-Security-Auditing Strings: ['S-1-5-19'  'LOCAL SERVICE'  'NT AUTHORITY'  '0x00000000000003e5'  '2023-12-27T15:16:59.649641200Z'  '2023-12-27T00:16:59.879656000Z'  '0x000000000000065c'  'C:\\Windows\\System32\\svchost.exe'] Computer Name: WinDev2311Eval Record Number: 2894 Event Level: 0</data>
+  <data key="d2">2023-12-27T00:16:59.896679+00:00</data>
+  <data key="d3">16</data>
+  <data key="d4">high</data>
+</node>
+<node id="12">
+  <data key="d0">12. Remote Schtasks Creation[medium]</data>
+  <data key="d1">[781 / 0x030d] Provider identifier: {0f177893-4a9c-4709-b921-f432d67f43d5} Source Name: COM+ Strings: ['86400'  'SuppressDuplicateDuration'  'Software\\Microsoft\\COM3\\Eventlog'] Computer Name: WinDev2311Eval Record Number: 1354 Event Level: 4</data>
+  <data key="d2">2023-12-27T00:16:59.951914+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">medium</data>
+</node>
+<node id="13">
+  <data key="d0">13. Potential PlugX Activity[high]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{B79A8E70-0C7F-490C-AD1A-5835E73B4A98}] Actions: [REG_BINARY] (286 bytes) Description: [REG_SZ] Periodic maintenance task. DynamicInfo: [REG_BINARY] (36 bytes) Hash: [REG_BINARY] (32 bytes) Path: [REG_SZ] \Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance Schema: [REG_DWORD_LE] 65540 Triggers: [REG_BINARY] (248 bytes) URI: [REG_SZ] \Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance</data>
+  <data key="d2">2023-12-27T00:17:00.130349+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">high</data>
+</node>
+<node id="14">
+  <data key="d0">14. Antivirus - Ransomware Signature[critical]</data>
+  <data key="d1">BitLocker Encrypt All Drives File reference: 130068-1 Parent file reference: 129842-2 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_DATA_TRUNCATION</data>
+  <data key="d2">2023-12-27T00:17:00.306691+00:00</data>
+  <data key="d3">6</data>
+  <data key="d4">critical</data>
+</node>
+<node id="15">
+  <data key="d0">15. Windows AMSI Related Registry Tampering Via CommandLine[high]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\System\ControlSet001\Control\Session Manager\Executive] AdditionalCriticalWorkerThreads: [REG_DWORD_LE] 0 AdditionalDelayedWorkerThreads: [REG_DWORD_LE] 0 UuidSequenceNumber: [REG_DWORD_LE] 62809633</data>
+  <data key="d2">2023-12-27T00:17:00.894446+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="16">
+  <data key="d0">16. PUA - PingCastle Execution From Potentially Suspicious Parent[high]</data>
+  <data key="d1">utc.allow.json.bk File reference: 173-43 Parent file reference: 130526-3 Update source:  Update reason: USN_REASON_DATA_EXTEND  USN_REASON_FILE_CREATE</data>
+  <data key="d2">2023-12-27T00:17:00.959282+00:00</data>
+  <data key="d3">7</data>
+  <data key="d4">high</data>
+</node>
+<node id="17">
+  <data key="d0">17. Windows Recall Feature Enabled Via Reg.EXE[medium]</data>
+  <data key="d1">[410 / 0x019a] Provider identifier: {9c205a39-1250-487d-abd7-e831c6290539} Source Name: Microsoft-Windows-Kernel-PnP Strings: ['ROOT\\hvservice\\0000'  'hvservice.inf'  '{4D36E97D-E325-11CE-BFC1-08002BE10318}'  'hvservice'  ''  ''  '0x00000000'  '0x00000000'] Computer Name: WinDev2311Eval Record Number: 217 Event Level: 4</data>
+  <data key="d2">2023-12-27T00:17:01.185384+00:00</data>
+  <data key="d3">11</data>
+  <data key="d4">medium</data>
+</node>
+<node id="18">
+  <data key="d0">18. Lazarus Loaders[critical]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\WINEVT\Publishers\{cfeb0608-330e-4410-b00d-56d8da9986e6}] (default): [REG_SZ] Microsoft-Antimalware-AMFilter Enabled: [REG_DWORD_LE] 1 MessageFileName: [REG_EXPAND_SZ] C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.23100.2009-0\Drivers\WdFilter.sys ParameterFileName: [REG_EXPAND_SZ] C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.23100.2009-0\Drivers\WdFilter.sys ResourceFileName: [REG_EXPAND_SZ] C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.23100.2009-0\Drivers\WdFilter.sys</data>
+  <data key="d2">2023-12-27T00:17:01.637962+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">critical</data>
+</node>
+<node id="19">
+  <data key="d0">19. Regsvr32 Execution From Highly Suspicious Location[high]</data>
+  <data key="d1">Name: Windows Long name: Windows NTFS file reference: 1941-1 Shell item path: &lt;My Computer&gt; C:\Windows Origin: 590aee7bdd69b59b.customDestinations-ms</data>
+  <data key="d2">2023-12-27T00:17:02.000000+00:00</data>
+  <data key="d3">2</data>
+  <data key="d4">high</data>
+</node>
+<node id="20">
+  <data key="d0">20. High DNS subdomain requests rate per domain[high]</data>
+  <data key="d1">[171 / 0x00ab] Provider identifier: {3ff37a1c-a68d-4d6e-8c9b-f79e8b16c482} Source Name: Microsoft-Windows-Ntfs Strings: ['{003304EF-4AEF-4F53-B084-1D0010452165}'  '2'  'C:'  'true'  '-9223371982936396062'  '2'  '0'  '0'  '2'  '0'  '18446744073709551614'  '0'  '0'  '2'  '0'  '2030043136'  '80'  '4 KB  64 KB  1 MB  16 MB  128 MB  1 GB  16 GB  128 GB  1 TB  16 TB  1 EB  1+ EB'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '2'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '65'  '0'  '83'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '296'  '79'  '256us  1ms  4ms  16ms  64ms  128ms  256ms  2s  6s  10s  20s  1m  5m  15m  15m+'  '2'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0x00000000'  '0'  '0x00000000'  '0'  '0x00000000'  '0'  '0x00000000'  '0'  '0x00000000'  '0'] Computer Name: WinDev2311Eval Record Number: 149 Event Level: 4</data>
+  <data key="d2">2023-12-27T00:17:02.795886+00:00</data>
+  <data key="d3">4</data>
+  <data key="d4">high</data>
+</node>
+<node id="21">
+  <data key="d0">21. Remote File Download Via Findstr.EXE[medium]</data>
+  <data key="d1">[158 / 0x009e] Provider identifier: {3ff37a1c-a68d-4d6e-8c9b-f79e8b16c482} Source Name: Microsoft-Windows-Ntfs Strings: ['{41D3EC20-359C-4609-9CCB-B4B58A34D66C}'  '48'  '\\\\?\\Volume{41d3ec20-359c-4609-9ccb-b4b58a34d66c}'  '5'  '20480'  '5'  '0'  '0'  '0'  '12'  '217088'  '14'  '1'  '8192'  '2'  '6'  '53248'  '1'  '8192'  '0'  '0'  '0'  '0'  '0'  '0'  '1'  '12288'  '0'  '0'  '1'  '8192'  '0'  '0'  '1'  '4096'  '1'  '4096'  '8'  '32768'  '16'  '65536'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'  '0'] Computer Name: WinDev2311Eval Record Number: 150 Event Level: 4</data>
+  <data key="d2">2023-12-27T00:17:02.804645+00:00</data>
+  <data key="d3">4</data>
+  <data key="d4">medium</data>
+</node>
+<node id="22">
+  <data key="d0">22. Suspicious DumpMinitool Execution[high]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack\TraceManager] alternativeTraceHasStopTime: [REG_DWORD_LE] 0 alternativeTraceIsAutoLogger: [REG_DWORD_LE] 0 alternativeTraceIsExclusive: [REG_DWORD_LE] 0 alternativeTraceIsThrottled: [REG_DWORD_LE] 0 alternativeTraceMinTraceDurationFiletime: [REG_QWORD] 0 alternativeTracePriority: [REG_DWORD_LE] 0 alternativeTraceProfileHash: [REG_QWORD] 0 alternativeTraceRequiredBufferSpace: [REG_DWORD_LE] 0 alternativeTraceScenarioId: [REG_SZ] (empty) alternativeTraceSessionStartTime: [REG_QWORD] 0 alternativeTraceStartTime: [REG_QWORD] 0 alternativeTraceStopTime: [REG_QWORD] 0 alternativeTraceThrottleState: [REG_DWORD_LE] 0 aotHasStopTime: [REG_DWORD_LE] 0 aotIsAutoLogger: [REG_DWORD_LE] 0 aotIsExclusive: [REG_DWORD_LE] 0 aotIsThrottled: [REG_DWORD_LE] 0 aotMinTraceDurationFiletime: [REG_QWORD] 0 aotPriority: [REG_DWORD_LE] 0 aotProfileHash: [REG_QWORD] 0 aotRequiredBufferSpace: [REG_DWORD_LE] 0 aotScenarioId: [REG_SZ] (empty) aotSessionStartTime: [REG_QWORD] 0 aotStartTime: [REG_QWORD] 0 aotStopTime: [REG_QWORD] 0 aotThrottleState: [REG_DWORD_LE] 0 diagHasStopTime: [REG_DWORD_LE] 0 diagIsAutoLogger: [REG_DWORD_LE] 0 diagIsExclusive: [REG_DWORD_LE] 0 diagIsThrottled: [REG_DWORD_LE] 0 diagMinTraceDurationFiletime: [REG_QWORD] 0 diagPriority: [REG_DWORD_LE] 0 diagProfileHash: [REG_QWORD] 0 diagRequiredBufferSpace: [REG_DWORD_LE] 0 diagScenarioId: [REG_SZ] (empty) diagSessionStartTime: [REG_QWORD] 0 diagStartTime: [REG_QWORD] 0 diagStopTime: [REG_QWORD] 0 diagThrottleState: [REG_DWORD_LE] 0 miniTraceHasStopTime: [REG_DWORD_LE] 0 miniTraceIsAutoLogger: [REG_DWORD_LE] 0 miniTraceIsExclusive: [REG_DWORD_LE] 0 miniTraceIsThrottled: [REG_DWORD_LE] 0 miniTraceMinTraceDurationFiletime: [REG_QWORD] 0 miniTracePriority: [REG_DWORD_LE] 0 miniTraceProfileHash: [REG_QWORD] 0 miniTraceRequiredBufferSpace: [REG_DWORD_LE] 0 miniTraceScenarioId: [REG_SZ] (empty) miniTraceSessionStartTime: [REG_QWORD] 0 miniTraceSlotContentPermitted: [REG_DWORD_LE] 1 miniTraceSlotEnabled: [REG_DWORD_LE] 0 miniTraceStartTime: [REG_QWORD] 0 miniTraceStopTime: [REG_QWORD] 0 miniTraceThrottleState: [REG_DWORD_LE] 0</data>
+  <data key="d2">2023-12-27T00:17:03.257817+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="23">
+  <data key="d0">23. ETW Logging/Processing Option Disabled On IIS Server[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\DiagnosticLogCSP\EtwLog\Registered\Collectors\DeviceProvisioning] (default): [REG_SZ] DeviceProvisioning LogFileSizeLimitMB: [REG_DWORD_LE] 4 SessionName: [REG_SZ] DiagnosticLogCSP_DeviceProvisioning TraceLogFileMode: [REG_DWORD_LE] 1</data>
+  <data key="d2">2023-12-27T00:17:05.390868+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">medium</data>
+</node>
+<node id="24">
+  <data key="d0">24. Kapeka Backdoor Configuration Persistence[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Search\CatalogList\Applications] (empty)</data>
+  <data key="d2">2023-12-27T00:17:06.136576+00:00</data>
+  <data key="d3">12</data>
+  <data key="d4">medium</data>
+</node>
+<node id="25">
+  <data key="d0">25. Suspicious FileFix Execution Pattern[high]</data>
+  <data key="d1">.IdentityService File reference: 244132-1 Parent file reference: 132048-2 Update source:  Update reason: USN_REASON_RENAME_OLD_NAME</data>
+  <data key="d2">2023-12-27T00:17:06.375624+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">high</data>
+</node>
+<node id="26">
+  <data key="d0">26. Antivirus - Relevant File Paths Alerts Signature[high]</data>
+  <data key="d1">NTFS:\Windows\SoftwareDistribution\Download Type: directory</data>
+  <data key="d2">2023-12-27T00:17:06.859500+00:00</data>
+  <data key="d3">4</data>
+  <data key="d4">high</data>
+</node>
+<node id="27">
+  <data key="d0">27. Suspicious DNS Z Flag Bit Set[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Search\Gathering Manager\Applications\Windows\PluginManagers\1] ProgId: [REG_SZ] Search.MapPI</data>
+  <data key="d2">2023-12-27T00:17:06.941842+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">medium</data>
+</node>
+<node id="28">
+  <data key="d0">28. Potentially Suspicious Long Filename Pattern - Linux[low]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Search\CatalogNames\Windows] CatalogID: [REG_DWORD_LE] 2</data>
+  <data key="d2">2023-12-27T00:17:06.957114+00:00</data>
+  <data key="d3">1</data>
+  <data key="d4">low</data>
+</node>
+<edge source="0" target="0" id="0">
+  <data key="d5">440</data>
+</edge>
+<edge source="0" target="1" id="0">
+  <data key="d5">13</data>
+</edge>
+<edge source="0" target="3" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="0" target="4" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="0" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="1" target="2" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="1" target="1" id="0">
+  <data key="d5">178</data>
+</edge>
+<edge source="1" target="0" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="1" target="3" id="0">
+  <data key="d5">9</data>
+</edge>
+<edge source="1" target="4" id="0">
+  <data key="d5">11</data>
+</edge>
+<edge source="1" target="5" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="1" target="7" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="1" target="6" id="0">
+  <data key="d5">14</data>
+</edge>
+<edge source="1" target="8" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="1" target="11" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="0" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="2" target="1" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="2" target="5" id="0">
+  <data key="d5">13</data>
+</edge>
+<edge source="2" target="6" id="0">
+  <data key="d5">29</data>
+</edge>
+<edge source="2" target="2" id="0">
+  <data key="d5">354</data>
+</edge>
+<edge source="2" target="4" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="2" target="11" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="12" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="13" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="8" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="2" target="9" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="17" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="2" target="23" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="10" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="2" target="19" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="24" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="25" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="16" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="2" target="28" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="3" target="1" id="0">
+  <data key="d5">8</data>
+</edge>
+<edge source="3" target="4" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="3" target="0" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="3" target="3" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="4" target="4" id="0">
+  <data key="d5">50</data>
+</edge>
+<edge source="4" target="0" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="4" target="1" id="0">
+  <data key="d5">14</data>
+</edge>
+<edge source="4" target="3" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="4" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="4" target="11" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="5" target="5" id="0">
+  <data key="d5">216</data>
+</edge>
+<edge source="5" target="1" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="5" target="6" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="5" target="7" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="5" target="8" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="5" target="9" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="5" target="2" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="5" target="24" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="6" target="5" id="0">
+  <data key="d5">8</data>
+</edge>
+<edge source="6" target="6" id="0">
+  <data key="d5">114</data>
+</edge>
+<edge source="6" target="9" id="0">
+  <data key="d5">52</data>
+</edge>
+<edge source="6" target="10" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="6" target="2" id="0">
+  <data key="d5">35</data>
+</edge>
+<edge source="6" target="13" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="14" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="8" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="6" target="1" id="0">
+  <data key="d5">7</data>
+</edge>
+<edge source="6" target="16" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="18" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="0" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="6" target="24" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="7" target="7" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="7" target="2" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="7" target="8" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="8" target="7" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="8" id="0">
+  <data key="d5">30</data>
+</edge>
+<edge source="8" target="2" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="8" target="5" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="8" target="11" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="8" target="1" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="8" target="17" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="9" id="0">
+  <data key="d5">112</data>
+</edge>
+<edge source="9" target="6" id="0">
+  <data key="d5">44</data>
+</edge>
+<edge source="9" target="1" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="9" target="15" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="2" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="9" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="19" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="20" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="17" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="9" target="22" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="10" target="10" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="10" target="2" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="10" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="10" target="26" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="11" target="11" id="0">
+  <data key="d5">12</data>
+</edge>
+<edge source="11" target="2" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="11" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="12" target="12" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="12" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="13" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="13" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="14" target="14" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="14" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="15" target="9" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="16" target="16" id="0">
+  <data key="d5">4</data>
+</edge>
+<edge source="16" target="5" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="16" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="16" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="17" target="17" id="0">
+  <data key="d5">6</data>
+</edge>
+<edge source="17" target="6" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="17" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="17" target="27" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="18" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="19" target="16" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="19" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="20" target="20" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="20" target="21" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="21" target="21" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="21" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="22" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="23" target="6" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="24" target="2" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="24" target="24" id="0">
+  <data key="d5">5</data>
+</edge>
+<edge source="24" target="1" id="0">
+  <data key="d5">2</data>
+</edge>
+<edge source="25" target="2" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="26" target="26" id="0">
+  <data key="d5">3</data>
+</edge>
+<edge source="26" target="9" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="27" target="24" id="0">
+  <data key="d5">1</data>
+</edge>
+<edge source="28" target="24" id="0">
+  <data key="d5">1</data>
+</edge>
+</graph></graphml>
