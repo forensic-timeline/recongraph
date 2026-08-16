@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d4" for="edge" attr.name="weight" attr.type="long"/>
+<key id="d3" for="node" attr.name="log_count" attr.type="long"/>
+<key id="d2" for="node" attr.name="timestamp" attr.type="string"/>
+<key id="d1" for="node" attr.name="message" attr.type="string"/>
+<key id="d0" for="node" attr.name="event" attr.type="string"/>
+<graph edgedefault="directed"><node id="0">
+  <data key="d0">0. Execution Of Non-Existing File[high]</data>
+  <data key="d1">AC File reference: 192596-4 Parent file reference: 192590-5 Update source:  Update reason: USN_REASON_SECURITY_CHANGE  USN_REASON_CLOSE</data>
+  <data key="d2">2023-12-26T23:33:03.422585+00:00</data>
+  <data key="d3">791</data>
+</node>
+<node id="1">
+  <data key="d0">1. PUA - Rclone Execution[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\PolicyCache\Microsoft.Windows.PrintQueueActionCenter_cw5n1h2txyewy] (empty)</data>
+  <data key="d2">2023-12-26T23:33:03.422585+00:00</data>
+  <data key="d3">168</data>
+</node>
+<node id="2">
+  <data key="d0">2. Kapeka Backdoor Execution Via RunDLL32.EXE[high]</data>
+  <data key="d1">NTFS:\Users\User\AppData\Local\Packages\Microsoft.Windows.PrintQueueActionCenter_cw5n1h2txyewy\AC Type: directory</data>
+  <data key="d2">2023-12-26T23:33:03.422585+00:00</data>
+  <data key="d3">304</data>
+</node>
+<node id="3">
+  <data key="d0">3. Suspicious PrinterPorts Creation (CVE-2020-1048)[high]</data>
+  <data key="d1">[2097 / 0x0831] Provider identifier: {d1bc9aff-2abf-4d71-9146-ecb2a986eb85} Source Name: Microsoft-Windows-Windows Firewall With Advanced Security Strings: ['{D85700F2-D42A-4DDC-8CB0-70A10FE10C5E}'  '@{Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy?ms-resource://PrintQueueActionCenter/resources/AppxManifest_DisplayName}'  '1'  ''  ''  '1'  '256'  ''  ''  '2'  '2147483647'  '*'  '*'  ''  ''  '@{Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy?ms-resource://PrintQueueActionCenter/resources/AppxManifest_DisplayName}'  '1'  '1'  '0'  '0'  '0'  'S-1-5-80-3088073201-1464728630-1879813800-1107566885-823218052'  'C:\\Windows\\System32\\svchost.exe'  '544'  '65536'  '0'  ''  '0'] Computer Name: WinDev2311Eval Record Number: 908 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:03.450704+00:00</data>
+  <data key="d3">270</data>
+</node>
+<node id="4">
+  <data key="d0">4. Suspicious Desktopimgdownldr Command[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.Windows.PrintQueueActionCenter_cw5n1h2txyewy\SplashScreen\Microsoft.Windows.PrintQueueActionCenter_cw5n1h2txyewy!App] AppName: [REG_SZ] @{Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy?ms-resource://PrintQueueActionCenter/resources/AppxManifest_DisplayName} BackgroundColor: [REG_SZ] transparent Image: [REG_SZ] @{Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy?ms-resource://PrintQueueActionCenter/Files/Assets/SplashScreen.png}</data>
+  <data key="d2">2023-12-26T23:33:03.488655+00:00</data>
+  <data key="d3">87</data>
+</node>
+<node id="5">
+  <data key="d0">5. Suspicious DumpMinitool Execution[high]</data>
+  <data key="d1">[HKEY_CURRENT_USER\Software\Classes\Extensions\ContractId\Windows.BackgroundTasks\PackageId\Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy\ActivatableClassId\App.AppX7ada8gpmsmk9w0fxae51re4zxv2c4x9r.mca\CustomProperties] Capabilities: [REG_DWORD_LE] 484124</data>
+  <data key="d2">2023-12-26T23:33:03.505929+00:00</data>
+  <data key="d3">113</data>
+</node>
+<node id="6">
+  <data key="d0">6. Linux Suspicious Child Process from Node.js - React2Shell[high]</data>
+  <data key="d1">[613 / 0x0265] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['6'  'Microsoft.Windows.PrintQueueActionCenter_1.0.1.0_neutral_neutral_cw5n1h2txyewy'  '\r\nOverall time: 1844 ms\r\nGap: 16 ms\r\nEnqueue cost: 250 ms\r\nDequeue delay: 31 ms\r\nGap: 15 ms\r\nBundle processing cost: 32 ms\r\nIndexing cost: 172 ms\r\nResolve dependency cost: 93 ms\r\nGap: 47 ms\r\nCheck approval cost: 16 ms\r\nEvaluation cost: 47 ms\r\nHardlinking evaluation cost: 0 ms\r\nGap: 15 ms\r\nStage required cost: 0 ms\r\nFlushing and closing files cost: 0 ms\r\nGap: 16 ms\r\nMachine register cost: 0 ms\r\nStage user data cost: 0 ms\r\nGap: 62 ms\r\nRegistration cost: 297 ms\r\nGap: 63 ms\r\nRepository commit transaction cost: 203 ms\r\nGap: 297 ms\r\nData flush cost: 0 ms\r\nPost DeStage repository commit transaction cost: 140 ms\r\nRemaining cost: 32 ms\r\n'] Computer Name: WinDev2311Eval Record Number: 8040 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:04.325708+00:00</data>
+  <data key="d3">79</data>
+</node>
+<node id="7">
+  <data key="d0">7. Suspicious Microsoft OneNote Child Process[high]</data>
+  <data key="d1">[10002 / 0x2712] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['6'  'Windows.PrintDialog_6.2.2.0_neutral_neutral_cw5n1h2txyewy'  'C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\e43f305b-2187-4195-97d3-f115e81e31ad_S-1-5-21-4087375726-1105420669-2909453743-1000_34.rslc'] Computer Name: WinDev2311Eval Record Number: 8044 Event Level: 5</data>
+  <data key="d2">2023-12-26T23:33:04.428445+00:00</data>
+  <data key="d3">24</data>
+</node>
+<node id="8">
+  <data key="d0">8. Regsvr32 Execution From Highly Suspicious Location[high]</data>
+  <data key="d1">[854 / 0x0356] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: [' C:\\Windows\\PrintDialog\\AppxManifest.xml'] Computer Name: WinDev2311Eval Record Number: 8046 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:04.431818+00:00</data>
+  <data key="d3">24</data>
+</node>
+<node id="9">
+  <data key="d0">9. Antivirus - Relevant File Paths Alerts Signature[high]</data>
+  <data key="d1">NTFS:\Windows\PrintDialog Type: directory</data>
+  <data key="d2">2023-12-26T23:33:04.435108+00:00</data>
+  <data key="d3">44</data>
+</node>
+<node id="10">
+  <data key="d0">10. Windows AMSI Related Registry Tampering Via CommandLine[high]</data>
+  <data key="d1">[855 / 0x0357] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: [' addPackageList: Windows.PrintDialog_6.2.2.0_neutral_neutral_cw5n1h2txyewy'] Computer Name: WinDev2311Eval Record Number: 8047 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:04.570947+00:00</data>
+  <data key="d3">31</data>
+</node>
+<node id="11">
+  <data key="d0">11. Enumeration via the Global Catalog[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Appx\PackageState\S-1-5-21-4087375726-1105420669-2909453743-1000\Windows.PrintDialog_cw5n1h2txyewy] WnfStateName: [REG_BINARY] (8 bytes)</data>
+  <data key="d2">2023-12-26T23:33:04.898537+00:00</data>
+  <data key="d3">3</data>
+</node>
+<node id="12">
+  <data key="d0">12. Windows Recall Feature Enabled Via Reg.EXE[medium]</data>
+  <data key="d1">[9705 / 0x25e9] Provider identifier: {30336ed4-e327-447c-9de0-51b652c86108} Source Name: Microsoft-Windows-Shell-Core Strings: ['Software\\Microsoft\\Windows\\CurrentVersion\\Run'] Computer Name: WinDev2311Eval Record Number: 2234 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:05.919838+00:00</data>
+  <data key="d3">5</data>
+</node>
+<node id="13">
+  <data key="d0">13. Potential CVE-2023-36874 Exploitation - Fake Wermgr.Exe Creation[high]</data>
+  <data key="d1">NTFS:\Windows\WinSxS\amd64_microsoft-windows-d..iew.appxmain.deploy_31bf3856ad364e35_10.0.22621.1_none_3f0ff2a3f275c9fa\resources.pri Type: file</data>
+  <data key="d2">2023-12-26T23:33:06.875209+00:00</data>
+  <data key="d3">20</data>
+</node>
+<node id="14">
+  <data key="d0">14. Qakbot Rundll32 Fake DLL Extension Execution[critical]</data>
+  <data key="d1">[5857 / 0x16e1] Provider identifier: {1418ef04-b0b4-4623-bf7e-d74ab47bbdaa} Source Name: Microsoft-Windows-WMI-Activity Strings: ['Win32_DeviceGuard'  '0x00000000'  'wmiprvse.exe'  '4872'  '%SystemRoot%\\System32\\Win32_DeviceGuard.dll'] Computer Name: WinDev2311Eval Record Number: 331 Event Level: 0</data>
+  <data key="d2">2023-12-26T23:33:07.543432+00:00</data>
+  <data key="d3">12</data>
+</node>
+<node id="15">
+  <data key="d0">15. Suspicious FileFix Execution Pattern[high]</data>
+  <data key="d1">[633 / 0x0279] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['Microsoft.AccountsControl_10.0.22621.1_neutral__cw5n1h2txyewy'  'true'  '805306368'] Computer Name: WinDev2311Eval Record Number: 8082 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:08.147084+00:00</data>
+  <data key="d3">13</data>
+</node>
+<node id="16">
+  <data key="d0">16. Suspicious Spool Service Child Process[high]</data>
+  <data key="d1">[633 / 0x0279] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['Microsoft.Windows.NarratorQuickStart_10.0.22621.1_neutral_neutral_8wekyb3d8bbwe'  'true'  '805306368'] Computer Name: WinDev2311Eval Record Number: 8097 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:08.435593+00:00</data>
+  <data key="d3">4</data>
+</node>
+<node id="17">
+  <data key="d0">17. TerraMaster TOS CVE-2020-28188[high]</data>
+  <data key="d1">[633 / 0x0279] Provider identifier: {3f471139-acb7-4a01-b7a7-ff5da4ba2d43} Source Name: Microsoft-Windows-AppXDeployment-Server Strings: ['Microsoft.Windows.ShellExperienceHost_10.0.22621.2506_neutral_neutral_cw5n1h2txyewy'  'true'  '805306368'] Computer Name: WinDev2311Eval Record Number: 8105 Event Level: 4</data>
+  <data key="d2">2023-12-26T23:33:08.815639+00:00</data>
+  <data key="d3">2</data>
+</node>
+<node id="18">
+  <data key="d0">18. Kapeka Backdoor Configuration Persistence[medium]</data>
+  <data key="d1">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\Notifications\BackgroundCapability\S-1-15-2-3119458392-1009845475-4083330090-3659807469-4003170139-1239840055-303833190] (empty)</data>
+  <data key="d2">2023-12-26T23:33:09.821478+00:00</data>
+  <data key="d3">5</data>
+</node>
+<node id="19">
+  <data key="d0">19. Suspicious Computer Account Name Change CVE-2021-42287[high]</data>
+  <data key="d1">[4625 / 0x1211] Provider identifier: {54849625-5478-4994-a5ba-3e3b0328c30d} Source Name: Microsoft-Windows-Security-Auditing Strings: ['S-1-5-18'  'WINDEV2311EVAL$'  'WORKGROUP'  '0x00000000000003e7'  'S-1-0-0'  'root'  'WINDEV2311EVAL'  '0xc000006d'  '%%2313'  '0xc000006a'  '2'  'User32 '  'Negotiate'  'WINDEV2311EVAL'  '-'  '-'  '0'  '0x0000000000000de0'  'C:\\Windows\\System32\\svchost.exe'  '127.0.0.1'  '0'] Computer Name: WinDev2311Eval Record Number: 3332 Event Level: 0</data>
+  <data key="d2">2023-12-26T23:33:11.631160+00:00</data>
+  <data key="d3">2</data>
+</node>
+<edge source="0" target="0" id="0">
+  <data key="d4">660</data>
+</edge>
+<edge source="0" target="1" id="0">
+  <data key="d4">28</data>
+</edge>
+<edge source="0" target="2" id="0">
+  <data key="d4">26</data>
+</edge>
+<edge source="0" target="3" id="0">
+  <data key="d4">25</data>
+</edge>
+<edge source="0" target="6" id="0">
+  <data key="d4">19</data>
+</edge>
+<edge source="0" target="7" id="0">
+  <data key="d4">8</data>
+</edge>
+<edge source="0" target="9" id="0">
+  <data key="d4">10</data>
+</edge>
+<edge source="0" target="12" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="0" target="14" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="0" target="15" id="0">
+  <data key="d4">5</data>
+</edge>
+<edge source="0" target="16" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="0" target="19" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="0" target="5" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="0" target="4" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="1" target="1" id="0">
+  <data key="d4">106</data>
+</edge>
+<edge source="1" target="2" id="0">
+  <data key="d4">12</data>
+</edge>
+<edge source="1" target="3" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="1" target="4" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="1" target="5" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="1" target="0" id="0">
+  <data key="d4">21</data>
+</edge>
+<edge source="1" target="10" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="1" target="9" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="1" target="6" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="1" target="18" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="1" target="12" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="1" target="15" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="2" target="2" id="0">
+  <data key="d4">260</data>
+</edge>
+<edge source="2" target="0" id="0">
+  <data key="d4">22</data>
+</edge>
+<edge source="2" target="4" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="2" target="11" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="2" target="1" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="2" target="3" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="2" target="6" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="2" target="17" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="2" target="5" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="2" target="9" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="2" target="12" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="3" target="3" id="0">
+  <data key="d4">207</data>
+</edge>
+<edge source="3" target="1" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="3" target="0" id="0">
+  <data key="d4">29</data>
+</edge>
+<edge source="3" target="6" id="0">
+  <data key="d4">5</data>
+</edge>
+<edge source="3" target="8" id="0">
+  <data key="d4">12</data>
+</edge>
+<edge source="3" target="2" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="3" target="9" id="0">
+  <data key="d4">10</data>
+</edge>
+<edge source="3" target="15" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="4" target="1" id="0">
+  <data key="d4">8</data>
+</edge>
+<edge source="4" target="4" id="0">
+  <data key="d4">13</data>
+</edge>
+<edge source="4" target="5" id="0">
+  <data key="d4">66</data>
+</edge>
+<edge source="5" target="4" id="0">
+  <data key="d4">65</data>
+</edge>
+<edge source="5" target="5" id="0">
+  <data key="d4">37</data>
+</edge>
+<edge source="5" target="1" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="5" target="10" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="5" target="0" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="6" target="6" id="0">
+  <data key="d4">46</data>
+</edge>
+<edge source="6" target="0" id="0">
+  <data key="d4">17</data>
+</edge>
+<edge source="6" target="1" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="6" target="3" id="0">
+  <data key="d4">11</data>
+</edge>
+<edge source="6" target="14" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="7" target="7" id="0">
+  <data key="d4">12</data>
+</edge>
+<edge source="7" target="3" id="0">
+  <data key="d4">11</data>
+</edge>
+<edge source="7" target="10" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="8" target="8" id="0">
+  <data key="d4">12</data>
+</edge>
+<edge source="8" target="0" id="0">
+  <data key="d4">7</data>
+</edge>
+<edge source="8" target="10" id="0">
+  <data key="d4">5</data>
+</edge>
+<edge source="9" target="9" id="0">
+  <data key="d4">18</data>
+</edge>
+<edge source="9" target="10" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="9" target="3" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="9" target="13" id="0">
+  <data key="d4">13</data>
+</edge>
+<edge source="9" target="5" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="9" target="7" id="0">
+  <data key="d4">4</data>
+</edge>
+<edge source="9" target="0" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="10" target="10" id="0">
+  <data key="d4">13</data>
+</edge>
+<edge source="10" target="0" id="0">
+  <data key="d4">11</data>
+</edge>
+<edge source="10" target="4" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="10" target="1" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="10" target="9" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="10" target="6" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="11" target="0" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="12" target="12" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="12" target="3" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="12" target="6" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="12" target="0" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="12" target="1" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="13" target="13" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="13" target="0" id="0">
+  <data key="d4">9</data>
+</edge>
+<edge source="13" target="5" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="13" target="6" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="13" target="1" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="13" target="14" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="14" target="14" id="0">
+  <data key="d4">8</data>
+</edge>
+<edge source="14" target="2" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="14" target="6" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="14" target="0" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="14" target="3" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="15" target="15" id="0">
+  <data key="d4">6</data>
+</edge>
+<edge source="15" target="1" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="15" target="2" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="15" target="3" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="15" target="13" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="15" target="10" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="15" target="0" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="16" target="16" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="16" target="0" id="0">
+  <data key="d4">2</data>
+</edge>
+<edge source="17" target="17" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="17" target="16" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="18" target="1" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="18" target="3" id="0">
+  <data key="d4">3</data>
+</edge>
+<edge source="18" target="18" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="19" target="19" id="0">
+  <data key="d4">1</data>
+</edge>
+<edge source="19" target="0" id="0">
+  <data key="d4">1</data>
+</edge>
+</graph></graphml>
