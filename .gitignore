@@ -6,3 +6,4 @@ recongraph.egg-info/
 dist/
 venv/
 sample/
+reconstruction_edge_graph.graphml
